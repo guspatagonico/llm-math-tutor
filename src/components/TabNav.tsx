@@ -16,7 +16,7 @@ export default function TabNav({ activeTab, onNavigate }: TabNavProps) {
           <button
             key={tab.id}
             onClick={() => onNavigate(tab.id)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+            className={`flex items-center gap-1.5 px-3 py-2 min-h-[36px] rounded-lg text-xs font-semibold transition-all cursor-pointer ${
               isActive ? "bg-slate-800 text-white shadow-sm" : "text-slate-400 hover:text-slate-200"
             }`}
           >

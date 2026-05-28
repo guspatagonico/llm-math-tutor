@@ -8,8 +8,8 @@ export default function PathwayBanner() {
           <BookOpen className="w-4 h-4" />
         </div>
         <div>
-          <span className="text-[10px] font-bold text-indigo-800 dark:text-indigo-350 uppercase tracking-widest block font-sans">Ruta Didáctica</span>
-          <p className="text-xs text-slate-850 dark:text-slate-200 font-medium leading-relaxed font-sans">
+          <span className="text-[11px] font-bold text-indigo-800 dark:text-indigo-200 uppercase tracking-widest block font-sans">Ruta Didáctica</span>
+          <p className="text-sm text-slate-850 dark:text-slate-200 font-medium leading-relaxed font-sans max-w-prose">
             Recomendado comenzar por el concepto del binomio <strong className="text-indigo-950 dark:text-indigo-300">Sigmoide / Logit</strong>, pasar por la formulación termodinámica de <strong className="text-indigo-950 dark:text-indigo-300">Softmax y su Gradiente</strong>, y finalmente divertirse en el simulador de <strong className="text-indigo-950 dark:text-indigo-300">Temperatura artificial</strong>.
           </p>
         </div>

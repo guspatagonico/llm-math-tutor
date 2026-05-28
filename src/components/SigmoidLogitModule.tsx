@@ -44,51 +44,51 @@ export default function SigmoidLogitModule() {
             <Activity className="w-6 h-6" />
           </div>
           <div className="flex flex-col gap-2.5">
-            <h2 className="text-xl md:text-2xl font-display font-medium text-slate-900 dark:text-white tracking-tight">
+            <h2 className="text-xl font-display font-medium text-slate-900 dark:text-white tracking-tight">
               ¿Por qué Sigmoide y Logit?
             </h2>
-            <p className="text-xs text-slate-600 dark:text-slate-400 font-mono">
+            <p className="text-sm text-slate-600 dark:text-slate-400 font-sans">
               El puente matemático entre puntajes libres continuos e índices binarios probabilísticos
             </p>
           </div>
         </div>
 
         <div className="bg-slate-50/50 dark:bg-slate-950/50 rounded-xl p-5 border border-slate-200 dark:border-slate-800/80 mb-6 space-y-4 font-sans">
-          <h3 className="text-sm font-semibold text-slate-850 dark:text-slate-200 flex items-center gap-2 font-mono">
+          <h3 className="text-sm font-semibold text-slate-850 dark:text-slate-200 flex items-center gap-2 font-sans">
             <HelpCircle className="w-4 h-4 text-blue-650 dark:text-blue-400" />
             ¿Qué tipo de distribución estamos analizando en LLMs?
           </h3>
-          <div className="text-xs sm:text-sm text-slate-800 dark:text-slate-300 leading-relaxed">
+          <div className="text-sm text-slate-800 dark:text-slate-300 leading-relaxed">
             <MathMarkdownRenderer content="Un LLM predice el próximo token seleccionando una palabra de un vocabulario finito y fijo $V$ de tamaño (generalmente discreto)." textClassName="text-slate-800 dark:text-slate-300" />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-2">
             <div className="bg-white dark:bg-slate-900/50 p-4 rounded-lg border border-slate-200 dark:border-slate-800/80 hover:border-blue-500/30 transition-all duration-200 shadow-sm">
-              <span className="text-xs font-bold text-blue-800 dark:text-blue-400 uppercase tracking-wider block mb-1 font-mono">1. Espacio de Distribución</span>
+              <span className="text-xs font-bold text-blue-800 dark:text-blue-400 uppercase tracking-wider block mb-1 font-sans">1. Espacio de Distribución</span>
               <p className="text-sm font-bold text-slate-900 dark:text-slate-100">Elementos Discretos en Espacio Discreto</p>
-              <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+              <p className="text-sm text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
                 La salida es una <strong>distribución categórica</strong>. Las palabras son elementos discretos; no hay estados continuos entre ellas.
               </p>
             </div>
 
             <div className="bg-white dark:bg-slate-900/50 p-4 rounded-lg border border-slate-200 dark:border-slate-800/80 hover:border-emerald-500/30 transition-all duration-200 shadow-sm">
-              <span className="text-xs font-bold text-emerald-800 dark:text-emerald-400 uppercase tracking-wider block mb-1 font-mono">2. El Desafío Neural</span>
+              <span className="text-xs font-bold text-emerald-800 dark:text-emerald-400 uppercase tracking-wider block mb-1 font-sans">2. El Desafío Neural</span>
               <p className="text-sm font-bold text-slate-900 dark:text-slate-100">Cómputo en Espacio Continuo</p>
-              <div className="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+              <div className="text-sm text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
                 <MathMarkdownRenderer content="Las redes de aprendizaje profundo calculan reales continuos. Sus últimas capas lineales producen números flotantes ilimitados (**logits**) en $(-\infty, \infty)$." textClassName="text-slate-650 dark:text-slate-400" />
               </div>
             </div>
 
             <div className="bg-white dark:bg-slate-900/50 p-4 rounded-lg border border-slate-200 dark:border-slate-800/80 hover:border-rose-500/30 transition-all duration-200 shadow-sm font-sans">
-              <span className="text-xs font-bold text-rose-800 dark:text-rose-450 uppercase tracking-wider block mb-1 font-mono">3. El Vínculo de Mapeo</span>
+              <span className="text-xs font-bold text-rose-800 dark:text-rose-300 uppercase tracking-wider block mb-1 font-sans">3. El Vínculo de Mapeo</span>
               <p className="text-sm font-bold text-slate-900 dark:text-slate-100">El Log-Odds (Logit)</p>
-              <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+              <p className="text-sm text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
                 Mapear lo continuo con la escala probabilística requiere un filtro matemático. Los logits actúan como el logaritmo de odds, facilitando la optimización.
               </p>
             </div>
           </div>
 
-          <p className="text-xs sm:text-sm text-slate-800 dark:text-white leading-relaxed">
+          <p className="text-sm text-slate-800 dark:text-white leading-relaxed">
             Para entender el caso de distribuciones multiclase generalizado (Softmax), primero debemos estudiar el caso binario de <strong>2 estados alternativos</strong>, gobernado por la función logística (<strong>Sigmoide</strong>) y su inverso multiplicativo, el <strong>Logit</strong>.
           </p>
         </div>
@@ -98,10 +98,10 @@ export default function SigmoidLogitModule() {
           <div className="bg-slate-50/50 dark:bg-slate-950/30 p-5 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4 font-sans">
             <h3 className="font-display font-medium text-slate-800 dark:text-slate-200 text-lg flex items-center justify-between">
               <span>Función Sigmoide: σ(x)</span>
-              <span className="text-xs text-blue-700 dark:text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2.5 py-1 rounded-full font-mono font-bold">Mapeo [0, 1]</span>
+              <span className="text-xs text-blue-700 dark:text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2.5 py-1 rounded-full font-sans font-bold">Mapeo [0, 1]</span>
             </h3>
 
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
               Recibe un número real continuo sin límites, x ∈ (-∞, ∞), y lo confina a una escala de probabilidad segura, P ∈ (0, 1).
             </p>
 
@@ -124,12 +124,12 @@ export default function SigmoidLogitModule() {
 
             <div className="p-4 bg-white dark:bg-slate-950/80 rounded-xl border border-slate-200 dark:border-slate-800 shadow-inner space-y-3">
               <div className="flex justify-between items-center text-xs">
-                <span className="font-semibold text-slate-600 dark:text-slate-400 font-mono">Entrada Bruta (x):</span>
+                <span className="font-semibold text-slate-600 dark:text-slate-400 font-sans">Entrada Bruta (x):</span>
                 <span className="text-sm font-mono font-bold text-blue-700 dark:text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2 rounded">{sigmoidInput.toFixed(2)}</span>
               </div>
-              <input type="range" min="-6" max="6" step="0.1" value={sigmoidInput} onChange={(e) => setSigmoidInput(parseFloat(e.target.value))} className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500" />
+              <input type="range" min="-6" max="6" step="0.1" value={sigmoidInput} onChange={(e) => setSigmoidInput(parseFloat(e.target.value))} aria-label="Entrada bruta x para la función Sigmoide" className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500" />
               <div className="flex items-center justify-between pt-2 border-t border-slate-200 dark:border-slate-800/80 text-xs">
-                <span className="text-slate-600 dark:text-slate-400 font-medium font-mono">Probabilidad de Salida:</span>
+                <span className="text-slate-600 dark:text-slate-400 font-medium font-sans">Probabilidad de Salida:</span>
                 <span className="text-base font-mono font-bold text-emerald-700 dark:text-emerald-400">{outputSigmoid.toFixed(4)} ({(outputSigmoid * 100).toFixed(1)}%)</span>
               </div>
             </div>
@@ -160,10 +160,10 @@ export default function SigmoidLogitModule() {
           <div className="bg-slate-50/50 dark:bg-slate-950/30 p-5 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4 font-sans">
             <h3 className="font-display font-medium text-slate-800 dark:text-slate-200 text-lg flex items-center justify-between">
               <span>Función Logit: L(p)</span>
-              <span className="text-xs text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full font-mono font-bold">Odds Expansion</span>
+              <span className="text-xs text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full font-sans font-bold">Odds Expansion</span>
             </h3>
 
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-sans">
+            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-sans">
               Es el inverso matemático de la Sigmoide. Recibe un límite de probabilidad de p ∈ (0, 1), y lo estira para expandirlo a toda la recta real (-∞, ∞).
             </p>
 
@@ -186,12 +186,12 @@ export default function SigmoidLogitModule() {
 
             <div className="p-4 bg-white dark:bg-slate-950/80 rounded-xl border border-slate-200 dark:border-slate-800 shadow-inner space-y-3">
               <div className="flex justify-between items-center text-xs">
-                <span className="font-semibold text-slate-600 dark:text-slate-400 font-mono">Probabilidad de entrada (p):</span>
+                <span className="font-semibold text-slate-600 dark:text-slate-400 font-sans">Probabilidad de entrada (p):</span>
                 <span className="text-sm font-mono font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 rounded">{(logitInput * 100).toFixed(0)}% ({logitInput.toFixed(2)})</span>
               </div>
-              <input type="range" min="0.05" max="0.95" step="0.01" value={logitInput} onChange={(e) => setLogitInput(parseFloat(e.target.value))} className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500" />
+              <input type="range" min="0.05" max="0.95" step="0.01" value={logitInput} onChange={(e) => setLogitInput(parseFloat(e.target.value))} aria-label="Probabilidad de entrada p para la función Logit" className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500" />
               <div className="flex items-center justify-between pt-2 border-t border-slate-200 dark:border-slate-800/80 text-xs">
-                <span className="text-slate-600 dark:text-slate-400 font-medium font-mono">Log-Odds (Valor de Logit):</span>
+                <span className="text-slate-600 dark:text-slate-400 font-medium font-sans">Log-Odds (Valor de Logit):</span>
                 <span className="text-base font-mono font-bold text-blue-700 dark:text-blue-400">{outputLogit.toFixed(4)}</span>
               </div>
             </div>
@@ -219,7 +219,7 @@ export default function SigmoidLogitModule() {
           </div>
         </div>
 
-        <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800/80 text-xs text-slate-600 dark:text-slate-400 leading-relaxed flex items-start gap-3">
+        <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800/80 text-sm text-slate-600 dark:text-slate-400 leading-relaxed flex items-start gap-3">
           <Award className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0" />
           <div>
             <span className="font-bold text-slate-800 dark:text-slate-200 font-sans">Resumen de Mapeo:</span> Al representar los scores antes de la salida como logits (reales infinitos), las redes entrenan linealmente y con facilidad. La Sigmoide actúa como el portal de traducción de probabilidades binarias. Para vocabularios masivos multiclase, generalizamos este patrón con <strong>Softmax</strong>, regulando el reparto probabilístico.
