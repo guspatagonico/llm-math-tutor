@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,450;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Lora", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Custom Math/Interactive utility styles */
+.math-block {
+  font-family: inherit;
+  background-color: rgba(243, 244, 246, 0.4);
+  border: 1px solid rgba(229, 231, 235, 1);
+}
+
+.dark-math-block {
+  font-family: inherit;
+  background-color: rgba(31, 41, 55, 0.8);
+  border: 1px solid rgba(75, 85, 99, 1);
+}
+
+/* Base style resets */
+body {
+  background-color: #f8fafc; /* slate-50 */
+  color: #334155; /* slate-700 */
+  font-family: var(--font-sans);
+  transition: background-color 300ms ease, color 300ms ease;
+}
+
+body.dark {
+  background-color: #020617; /* Slate-950 */
+  color: #94a3b8; /* Slate-400 */
+}
+
+

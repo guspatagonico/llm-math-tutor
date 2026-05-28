@@ -1,0 +1,6 @@
+{
+  "name": "LLM Math Tutor",
+  "description": "Explicación interactiva y didáctica sobre sigmoid, logit, softmax, gradientes y temperatura en LLMs.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
