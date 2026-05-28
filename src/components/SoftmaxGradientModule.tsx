@@ -31,8 +31,8 @@ export default function SoftmaxGradientModule() {
           <Network className="w-6 h-6" />
         </div>
         <div>
-          <h2 className="text-xl md:text-2xl font-display font-medium text-slate-900 dark:text-white tracking-tight">Física Estadística y el Gradiente de Softmax</h2>
-          <p className="text-xs text-slate-600 dark:text-slate-400 font-mono">Del origen termodinámico del reparto energético al asombroso gradiente de retropropagación</p>
+          <h2 className="text-lg md:text-xl font-display font-medium text-slate-900 dark:text-white tracking-tight">Física Estadística y el Gradiente de Softmax</h2>
+          <p className="text-xs text-slate-600 dark:text-slate-400 font-sans">Del origen termodinámico del reparto energético al asombroso gradiente de retropropagación</p>
         </div>
       </div>
 
@@ -75,8 +75,8 @@ export default function SoftmaxGradientModule() {
               </div>
             }
             termExplanations={[
-              { term: "e^zi (Exponencial local)", explanation: "Amplifica la diferencia entre puntajes reales (hace que diferencias pequeñas en valores brutos sean distinciones grandes de probabilidad, garantizando positivos absolutos).", colorClass: "text-purple-600 bg-purple-500/10 border-purple-500/25" },
-              { term: "∑ e^zj (Sumatoria normalizadora)", explanation: "La suma de los exponenciales de todo el vocabulario actúa como divisor común de forma que la suma total sea exactamente 1.", colorClass: "text-amber-600 bg-amber-500/10 border-amber-500/25" },
+              { term: "e^zi (Exponencial local)", explanation: "Amplifica la diferencia entre puntajes reales (hace que diferencias pequeñas en valores brutos sean distinciones grandes de probabilidad, garantizando positivos absolutos).", colorClass: "text-purple-600 dark:text-purple-300 bg-purple-500/10 border-purple-500/25" },
+              { term: "∑ e^zj (Sumatoria normalizadora)", explanation: "La suma de los exponenciales de todo el vocabulario actúa como divisor común de forma que la suma total sea exactamente 1.", colorClass: "text-amber-600 dark:text-amber-300 bg-amber-500/10 border-amber-500/25" },
             ]}
           />
         </div>
@@ -84,13 +84,13 @@ export default function SoftmaxGradientModule() {
 
       <div className="space-y-4 font-sans">
         <h3 className="font-display font-medium text-slate-800 dark:text-white text-lg">La Elegancia de su Gradiente (La Matriz Jacobiana)</h3>
-        <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+        <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed max-w-prose">
           En optimización, necesitamos saber cómo varía la probabilidad calculada del token <span className="font-serif italic font-semibold">i</span> (<span className="font-serif italic text-purple-600 dark:text-purple-400 font-bold">p<sub>i</sub></span>) cuando alteramos la entrada bruta (logit) del token <span className="font-serif italic font-semibold">j</span> (<span className="font-serif italic text-rose-600 dark:text-rose-400 font-bold">z<sub>j</sub></span>). La derivada matemática de Softmax con respecto a su entrada posee una belleza singular:
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-2">
           <div className="p-4 bg-teal-500/5 dark:bg-teal-500/5 border border-teal-200 dark:border-teal-500/20 rounded-xl space-y-2">
-            <h4 className="text-xs font-semibold text-teal-700 dark:text-teal-400 uppercase tracking-widest font-mono">Caso 1: En la Diagonal (i = j)</h4>
+            <h4 className="text-xs font-semibold text-teal-700 dark:text-teal-400 uppercase tracking-widest font-sans">Caso 1: En la Diagonal (i = j)</h4>
             <div className="font-serif text-base font-semibold text-teal-700 dark:text-teal-300 p-2 bg-slate-50 dark:bg-slate-950 rounded border border-slate-200 dark:border-slate-800 flex items-center justify-center gap-1.5 select-none h-12">
               <div className="inline-flex flex-col items-center text-xs">
                 <span className="border-b border-teal-500/30 pb-0.5 px-1">∂p<sub>i</sub></span>
@@ -104,8 +104,8 @@ export default function SoftmaxGradientModule() {
           </div>
 
           <div className="p-4 bg-rose-500/5 dark:bg-rose-500/5 border border-rose-200 dark:border-rose-500/20 rounded-xl space-y-2">
-            <h4 className="text-xs font-semibold text-rose-700 dark:text-rose-400 uppercase tracking-widest font-mono">Caso 2: Fuera de la Diagonal (i ≠ j)</h4>
-            <div className="font-serif text-base font-semibold text-rose-700 dark:text-rose-350 p-2 bg-slate-50 dark:bg-slate-950 rounded border border-slate-200 dark:border-slate-800 flex items-center justify-center gap-1.5 select-none h-12">
+            <h4 className="text-xs font-semibold text-rose-700 dark:text-rose-400 uppercase tracking-widest font-sans">Caso 2: Fuera de la Diagonal (i ≠ j)</h4>
+            <div className="font-serif text-base font-semibold text-rose-700 dark:text-rose-300 p-2 bg-slate-50 dark:bg-slate-950 rounded border border-slate-200 dark:border-slate-800 flex items-center justify-center gap-1.5 select-none h-12">
               <div className="inline-flex flex-col items-center text-xs">
                 <span className="border-b border-rose-500/30 pb-0.5 px-1">∂p<sub>i</sub></span>
                 <span className="pt-0.5 px-1">∂z<sub>j</sub></span>
@@ -122,7 +122,7 @@ export default function SoftmaxGradientModule() {
         <div className="mt-6 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm dark:shadow-lg dark:shadow-black/40 font-sans">
           <div className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
             <div>
-              <span className="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-widest block font-mono">Estación de Prueba Interactiva</span>
+              <span className="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-widest block font-sans">Estación de Prueba Interactiva</span>
               <h4 className="text-sm font-semibold text-slate-700 dark:text-slate-200 font-sans">Ajusta los Logits y observa la Matriz Jacobiana de Gradientes</h4>
             </div>
             <button onClick={resetLogits} className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-medium shadow-sm active:scale-95 transition-all font-mono">
@@ -139,8 +139,8 @@ export default function SoftmaxGradientModule() {
                     <span className="font-semibold text-slate-700 dark:text-slate-300 font-mono">{TOKEN_LABELS[idx]}</span>
                     <span className="font-mono font-bold text-purple-600 dark:text-purple-400 bg-purple-500/10 border border-purple-500/20 px-1.5 rounded">{item.logit.toFixed(1)}</span>
                   </div>
-                  <input type="range" min="-2" max="6" step="0.1" value={item.logit} onChange={(e) => handleLogitChange(idx, parseFloat(e.target.value))} className="w-full h-1 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-purple-500" />
-                  <div className="flex justify-between text-[11px] text-slate-600 dark:text-slate-400 font-mono">
+                  <input type="range" min="-2" max="6" step="0.1" value={item.logit} onChange={(e) => handleLogitChange(idx, parseFloat(e.target.value))} aria-label={`Logit bruto del ${TOKEN_LABELS[idx]}`} className="w-full h-1 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-purple-500" />
+                  <div className="flex justify-between text-xs text-slate-600 dark:text-slate-400 font-mono">
                     <span>Exp: {item.exp.toFixed(2)}</span>
                     <span className="font-bold text-purple-600 dark:text-purple-400">Prob: {(item.prob * 100).toFixed(1)}%</span>
                   </div>
@@ -149,7 +149,7 @@ export default function SoftmaxGradientModule() {
             </div>
 
             <div className="lg:col-span-8 flex flex-col justify-center">
-              <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-2 text-center sm:text-left font-mono">Matriz Jacobiana de Gradientes de Softmax [ J ]</span>
+              <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-2 text-center sm:text-left font-sans">Matriz Jacobiana de Gradientes de Softmax [ J ]</span>
               <p className="text-xs text-slate-600 dark:text-slate-400 mb-4 text-center sm:text-left font-sans">
                 El valor representa la derivada instantánea de la probabilidad <span className="font-sans text-purple-700 dark:text-purple-400 font-bold">P<sub>fila</sub></span> con respecto al logit <span className="font-sans text-rose-600 dark:text-rose-500 font-bold">Z<sub>columna</sub></span>.
               </p>
@@ -172,7 +172,7 @@ export default function SoftmaxGradientModule() {
                         const isDiag = iIdx === jIdx;
                         return (
                           <div key={jIdx} className={`p-3 rounded-lg border text-xs font-mono font-bold transition-all duration-150 ${isDiag ? "bg-teal-500/10 dark:bg-teal-500/10 text-teal-600 dark:text-teal-300 border-teal-200 dark:border-teal-500/20" : "bg-rose-500/5 dark:bg-rose-500/10 text-rose-600 dark:text-rose-300 border-rose-200 dark:border-rose-500/20"}`} title={`Derivada de P${toSubscript(iIdx+1)} con respecto a Z${toSubscript(jIdx+1)}: ${val.toFixed(6)}`}>
-                            <span className="block text-[10px] text-slate-500 dark:text-slate-400 font-normal mb-0.5 font-sans">
+                            <span className="block text-[11px] text-slate-500 dark:text-slate-400 font-normal mb-0.5 font-sans">
                               {isDiag ? <span>p<sub>i</sub>(1-p<sub>i</sub>)</span> : <span>-p<sub>i</sub>p<sub>j</sub></span>}
                             </span>
                             {val >= 0 ? "+" : ""}{val.toFixed(4)}
@@ -224,7 +224,7 @@ export default function SoftmaxGradientModule() {
             <label className="text-xs text-slate-300 block font-medium">Token Correcto:</label>
             <div className="grid grid-cols-3 gap-1">
               {TOKEN_LABELS.map((_, idx) => (
-                <button key={idx} onClick={() => setCorrectTokenIdx(idx)} className={`p-1.5 rounded text-[10px] font-semibold transition-all ${correctTokenIdx === idx ? "bg-emerald-500 text-white shadow" : "bg-white/10 hover:bg-white/15 text-slate-200"}`}>
+                <button key={idx} onClick={() => setCorrectTokenIdx(idx)} className={`p-1.5 rounded text-xs font-semibold transition-all ${correctTokenIdx === idx ? "bg-emerald-700 text-white shadow" : "bg-white/10 hover:bg-white/15 text-slate-200"}`}>
                   T{idx + 1}
                 </button>
               ))}
