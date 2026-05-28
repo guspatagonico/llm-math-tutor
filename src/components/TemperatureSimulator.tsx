@@ -75,8 +75,8 @@ export default function TemperatureSimulator() {
             <Flame className="w-6 h-6 animate-pulse" />
           </div>
           <div>
-            <h2 className="text-xl md:text-2xl font-display font-medium text-slate-900 dark:text-white">Inferencia de Temperatura en Acción</h2>
-            <p className="text-sm text-slate-600 dark:text-slate-400 font-mono">Escala los logits en tiempo real y observa cómo el azar esculpe los textos autocompletados</p>
+            <h2 className="text-lg md:text-xl font-display font-medium text-slate-900 dark:text-white">Inferencia de Temperatura en Acción</h2>
+            <p className="text-sm text-slate-600 dark:text-slate-400 font-sans">Escala los logits en tiempo real y observa cómo el azar esculpe los textos autocompletados</p>
           </div>
         </div>
         {warningMsg && (
@@ -88,7 +88,7 @@ export default function TemperatureSimulator() {
       </div>
 
       <div className="space-y-3 font-sans">
-        <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest block font-mono">Paso 1: Escribe tu Prompt de Inicio para el Modelo</span>
+        <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest block font-sans">Paso 1: Escribe tu Prompt de Inicio para el Modelo</span>
         <div className="flex flex-col sm:flex-row gap-3">
           <input type="text" value={prompt} onChange={(e) => setPrompt(e.target.value)} className="flex-1 px-4 py-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl font-sans text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:bg-white dark:focus:bg-slate-950 text-slate-800 dark:text-slate-100 shadow-inner" placeholder="Escribe el inicio de una frase en español..." />
           <button onClick={() => fetchCandidates(prompt)} disabled={isPredicting} className="px-5 py-3 bg-purple-700 hover:bg-purple-600 disabled:bg-slate-200 disabled:text-slate-400 text-white rounded-xl text-sm font-semibold shadow-lg active:scale-[0.98] transition-all flex items-center justify-center gap-2 font-mono">
@@ -96,7 +96,7 @@ export default function TemperatureSimulator() {
           </button>
         </div>
         <div className="flex flex-wrap items-center gap-2 mt-2">
-          <span className="text-xs text-slate-600 dark:text-slate-500 font-medium font-sans">Sugerencias rápidas:</span>
+          <span className="text-xs text-slate-600 dark:text-slate-300 font-medium font-sans">Sugerencias rápidas:</span>
           {EXAMPLE_PROMPTS.map((p, idx) => (
             <button key={idx} onClick={() => handlePresetClick(p)} className="text-xs bg-slate-100 dark:bg-slate-950 hover:bg-purple-500/10 hover:text-purple-600 dark:hover:text-purple-300 px-3 py-1 rounded-full transition-colors text-slate-700 dark:text-slate-400 border border-slate-200 dark:border-slate-850 hover:border-purple-500/20">{p}...</button>
           ))}
@@ -108,29 +108,29 @@ export default function TemperatureSimulator() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start font-sans">
         <div className="lg:col-span-5 space-y-6">
           <div className="p-5 bg-slate-50 dark:bg-slate-950/40 border border-slate-150 dark:border-slate-850 rounded-2xl space-y-4 shadow-sm dark:shadow-xl">
-            <span className="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-widest block font-mono">Paso 2: Ajusta la Temperatura (T)</span>
+            <span className="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-widest block font-sans">Paso 2: Ajusta la Temperatura (T)</span>
             <div className="flex justify-between items-center font-sans">
               <span className="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5"><Sliders className="w-4 h-4 text-purple-600 dark:text-purple-400" /> Factor T:</span>
               <span className="text-lg font-mono font-extrabold text-purple-600 dark:text-purple-300 bg-purple-500/10 border border-purple-500/20 px-3 py-0.5 rounded-lg shadow-sm">{temperature.toFixed(2)}</span>
             </div>
-            <input type="range" min="0.1" max="2.5" step="0.05" value={temperature} onChange={(e) => setTemperature(parseFloat(e.target.value))} className="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-purple-500" />
-            <div className="flex justify-between text-[10px] text-slate-600 dark:text-slate-500 font-mono">
+            <input type="range" min="0.1" max="2.5" step="0.05" value={temperature} onChange={(e) => setTemperature(parseFloat(e.target.value))} aria-label="Factor de temperatura T para escalar los logits" className="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-purple-500" />
+            <div className="flex justify-between text-xs text-slate-600 dark:text-slate-400 font-sans">
               <span className="font-bold text-teal-600 dark:text-teal-400">0.1 (Fuerte)</span>
               <span>1.0 (Humano)</span>
               <span className="font-bold text-rose-600 dark:text-rose-400">2.5 (Caótico)</span>
             </div>
             <div className={`p-3.5 rounded-xl border text-xs space-y-1.5 transition-colors duration-200 font-sans ${interpretation.color}`}>
-              <div className="font-bold uppercase tracking-widest text-[10px] font-mono">Efecto: {interpretation.badge}</div>
+              <div className="font-bold uppercase tracking-widest text-xs font-sans">Efecto: {interpretation.badge}</div>
               <p className="leading-relaxed text-slate-700 dark:text-slate-300">{interpretation.text}</p>
             </div>
           </div>
 
           <div className="space-y-2 font-sans">
-            <h4 className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest block font-mono">Cómputo Matemático de Probabilidades Escaladas</h4>
+            <h3 className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest block font-sans">Cómputo Matemático de Probabilidades Escaladas</h3>
             <div className="border border-slate-150 dark:border-slate-800 rounded-xl overflow-hidden text-xs bg-slate-50 dark:bg-slate-950/40 backdrop-blur-sm shadow-sm dark:shadow-xl overflow-x-auto">
               <table className="w-full text-left border-collapse min-w-[360px]">
                 <thead>
-                  <tr className="bg-slate-100 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-[10px] text-slate-500 font-mono uppercase">
+                  <tr className="bg-slate-100 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-300 font-sans uppercase">
                     <th className="p-3 font-sans">Siguiente Token</th>
                     <th className="p-3 text-center">Logit (z<sub>i</sub>)</th>
                     <th className="p-3 text-center">Escalado (z<sub>i</sub>/T)</th>
@@ -148,7 +148,7 @@ export default function TemperatureSimulator() {
                         </td>
                         <td className="p-3 text-center text-slate-500 dark:text-slate-400">{step.logit.toFixed(1)}</td>
                         <td className="p-3 text-center text-slate-600 dark:text-slate-300">{step.scaledLogit.toFixed(2)}</td>
-                        <td className="p-3 text-center text-slate-500 dark:text-slate-500">{step.exponential > 10000 ? "Huge" : step.exponential.toFixed(2)}</td>
+                        <td className="p-3 text-center text-slate-500 dark:text-slate-300">{step.exponential > 10000 ? "Huge" : step.exponential.toFixed(2)}</td>
                         <td className="p-3 text-right font-extrabold text-purple-600 dark:text-purple-400">{(step.probability * 100).toFixed(1)}%</td>
                       </tr>
                     );
@@ -161,7 +161,7 @@ export default function TemperatureSimulator() {
 
         <div className="lg:col-span-7 space-y-6 font-sans">
           <div className="bg-slate-50 dark:bg-slate-950/40 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 space-y-4 shadow-inner">
-            <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest block font-mono">Distribución de probabilidad resultante</span>
+            <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest block font-sans">Distribución de probabilidad resultante</span>
             <div className="h-56 w-full bg-slate-50 dark:bg-slate-950/80 rounded-xl p-3 border border-slate-200 dark:border-slate-800/60 relative">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={steps} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
@@ -183,8 +183,8 @@ export default function TemperatureSimulator() {
 
             <div className="bg-slate-50 dark:bg-slate-950 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-xl space-y-4">
               <div className="flex justify-between items-center bg-purple-500/5 p-3 rounded-lg border border-purple-500/15">
-                <span className="text-xs font-bold text-purple-700 dark:text-purple-400 flex items-center gap-1.5 font-mono uppercase tracking-wider"><Flame className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400 animate-pulse" />Paso 3: Muestreador Estocástico de LLM</span>
-                <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold font-mono uppercase tracking-wider">Muestreo ponderado de Monte Carlo</span>
+                <span className="text-xs font-bold text-purple-700 dark:text-purple-400 flex items-center gap-1.5 font-sans uppercase tracking-wider"><Flame className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400 animate-pulse" />Paso 3: Muestreador Estocástico de LLM</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-bold font-sans uppercase tracking-wider">Muestreo ponderado de Monte Carlo</span>
               </div>
               <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-sans">
                 Asombroso: los modelos no seleccionan siempre la mayor probabilidad ("Argmax"). En cambio, hacen girar una "ruleta" donde el tamaño de cada arco está determinado por la probabilidad de Softmax. ¡Prueba tú mismo el giro de sampling!
@@ -197,7 +197,7 @@ export default function TemperatureSimulator() {
                 {sampledToken ? (
                   <div className="bg-slate-100 dark:bg-slate-900 border border-purple-500/20 rounded-xl px-4 py-2.5 flex items-center justify-between gap-4 flex-1 w-full animate-fade-in animate-bounce">
                     <div className="text-left">
-                      <span className="text-[9px] font-bold text-slate-500 dark:text-slate-400 uppercase block tracking-widest font-mono">Token Seleccionado:</span>
+                      <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase block tracking-widest font-sans">Token Seleccionado:</span>
                       <span className="text-sm font-mono font-bold text-purple-600 dark:text-purple-300">"{sampledToken}"</span>
                     </div>
                     <button onClick={appendSampledToPrompt} className="px-3 py-1.5 bg-purple-700 hover:bg-purple-600 text-white rounded-lg text-xs font-semibold inline-flex items-center gap-1 shadow transition-all hover:translate-x-0.5">
@@ -205,7 +205,7 @@ export default function TemperatureSimulator() {
                     </button>
                   </div>
                 ) : (
-                  <div className="text-xs text-slate-500 italic text-center sm:text-left flex-1 py-2">
+                  <div className="text-xs text-slate-500 dark:text-slate-300 italic text-center sm:text-left flex-1 py-2">
                     {isSampling ? "Buscando azar ponderado numérico en la campana..." : "Haz clic para probar los resultados del azar."}
                   </div>
                 )}
