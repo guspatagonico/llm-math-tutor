@@ -39,9 +39,9 @@ export default function SoftmaxGradientModule() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center bg-slate-50 dark:bg-slate-950/40 rounded-xl p-5 border border-slate-200 dark:border-slate-800/80">
         <div>
-          <h3 className="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-widest mb-2 font-mono">El Origen Práctico</h3>
+          <h3 className="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-widest mb-2 font-mono">Marco físico-matemático</h3>
           <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed mb-3">
-            La función Softmax no fue inventada al azar en el aprendizaje profundo; proviene de la <strong>física de la termodinámica del siglo XIX</strong> (distribución de Boltzmann/Gibbs).
+            La función Softmax puede interpretarse como una versión normalizada de la distribución de Boltzmann-Gibbs. Esta conexión no es meramente histórica: explica por qué un exponencial seguido de normalización produce una distribución válida sobre clases discretas.
           </p>
           <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
             En física, la probabilidad de encontrar una partícula en un estado cuántico <span className="font-serif italic text-purple-600 dark:text-purple-400 font-bold">i</span> con energía <span className="font-serif italic text-purple-600 dark:text-purple-400 font-bold">E<sub>i</sub></span> es proporcional a:
@@ -56,10 +56,10 @@ export default function SoftmaxGradientModule() {
                 </span>
               </span>
             </span>
-            Donde <span className="font-serif italic">k<sub>B</sub></span> es la constante de Boltzmann y <span className="font-serif italic">T</span> es la temperatura. Los estados de menor energía son exponencialmente más probables.
+            Donde <span className="font-serif italic">k<sub>B</sub></span> es la constante de Boltzmann y <span className="font-serif italic">T</span> la temperatura absoluta. Estados de menor energía tienen mayor masa de probabilidad bajo la misma escala térmica.
           </p>
           <div className="mt-3 p-3 bg-purple-500/10 rounded-lg border border-purple-500/20 text-xs text-purple-700 dark:text-purple-300">
-            <strong>Traducción a LLMs:</strong> Si definimos los logits <span className="font-serif italic font-semibold">z<sub>i</sub></span> de la red como el negativo de la energía molecular de un token (<span className="font-serif italic">-E<sub>i</sub> = z<sub>i</sub></span>), obtenemos exactamente la fórmula Softmax estándar con Temperatura.
+            <strong>Traducción a LLMs:</strong> si modelamos <span className="font-serif italic font-semibold">z<sub>i</sub></span> como energía negativa efectiva (<span className="font-serif italic">z<sub>i</sub> = -E<sub>i</sub></span>), la normalización Softmax emerge de forma natural. En práctica moderna (Transformers), esto se aplica sobre scores de atención y logits de salida.
           </div>
         </div>
 
@@ -76,8 +76,8 @@ export default function SoftmaxGradientModule() {
               </div>
             }
             termExplanations={[
-              { term: "e^zi (Exponencial local)", explanation: "Amplifica la diferencia entre puntajes reales (hace que diferencias pequeñas en valores brutos sean distinciones grandes de probabilidad, garantizando positivos absolutos).", colorClass: "text-purple-600 dark:text-purple-300 bg-purple-500/10 border-purple-500/25" },
-              { term: "∑ e^zj (Sumatoria normalizadora)", explanation: "La suma de los exponenciales de todo el vocabulario actúa como divisor común de forma que la suma total sea exactamente 1.", colorClass: "text-amber-600 dark:text-amber-300 bg-amber-500/10 border-amber-500/25" },
+               { term: "e^zi (Exponencial local)", explanation: "Garantiza positividad y aumenta la separación relativa entre scores. Diferencias aditivas en logits se convierten en cocientes multiplicativos de probabilidad.", colorClass: "text-purple-600 dark:text-purple-300 bg-purple-500/10 border-purple-500/25" },
+               { term: "∑ e^zj (Partición normalizadora)", explanation: "Es la constante de normalización (función de partición discreta) que asegura una distribución categórica con suma total 1.", colorClass: "text-amber-600 dark:text-amber-300 bg-amber-500/10 border-amber-500/25" },
             ]}
           />
         </div>
@@ -86,7 +86,7 @@ export default function SoftmaxGradientModule() {
       <div className="space-y-4 font-sans">
         <h3 className="font-display font-medium text-slate-800 dark:text-white text-lg">La Elegancia de su Gradiente (La Matriz Jacobiana)</h3>
         <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed max-w-prose">
-          En optimización, necesitamos saber cómo varía la probabilidad calculada del token <span className="font-serif italic font-semibold">i</span> (<span className="font-serif italic text-purple-600 dark:text-purple-400 font-bold">p<sub>i</sub></span>) cuando alteramos la entrada bruta (logit) del token <span className="font-serif italic font-semibold">j</span> (<span className="font-serif italic text-rose-600 dark:text-rose-400 font-bold">z<sub>j</sub></span>). La derivada matemática de Softmax con respecto a su entrada posee una belleza singular:
+          En optimización, interesa la sensibilidad local de <span className="font-serif italic text-purple-600 dark:text-purple-400 font-bold">p<sub>i</sub></span> frente a perturbaciones en <span className="font-serif italic text-rose-600 dark:text-rose-400 font-bold">z<sub>j</sub></span>. Esa sensibilidad está dada por la Jacobiana de Softmax, estructura central para backpropagation:
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-2">
@@ -101,7 +101,7 @@ export default function SoftmaxGradientModule() {
               <span className="italic">p<sub>i</sub></span>
               <span className="font-sans">(1 - <span className="italic">p<sub>i</sub></span>)</span>
             </div>
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Es una tasa positiva. Si aumentas el logit de un token, aumentas directamente su propia probabilidad. ¡Tiene exactamente el mismo formato de derivada que la Sigmoide!</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Término de auto-sensibilidad. Es positivo y alcanza máximo cuando p_i≈0.5 en el caso binario análogo; en multiclase, decrece al saturar la probabilidad.</p>
           </div>
 
           <div className="p-4 bg-rose-500/5 dark:bg-rose-500/5 border border-rose-200 dark:border-rose-500/20 rounded-xl space-y-2">
@@ -116,7 +116,7 @@ export default function SoftmaxGradientModule() {
               <span className="italic">p<sub>i</sub></span>
               <span className="italic">p<sub>j</sub></span>
             </div>
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Es una tasa negativa. Indica competencia: dado que las probabilidades deben sumar exactamente <span className="font-serif">1</span>, si aumentas el logit de un token rival <span className="font-serif italic font-semibold">j</span>, restas probabilidad al token actual <span className="font-serif italic font-semibold">i</span>.</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Término de acoplamiento competitivo. Es negativo por conservación de masa de probabilidad: aumentar una clase redistribuye peso y reduce otras.</p>
           </div>
         </div>
 
@@ -188,8 +188,8 @@ export default function SoftmaxGradientModule() {
               <div className="mt-4 p-3 bg-purple-500/10 rounded-lg border border-purple-500/20 text-xs text-purple-700 dark:text-purple-300 flex items-start gap-2">
                 <Info className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0 mt-0.5 font-bold" />
                 <p className="font-sans leading-relaxed text-left">
-                  <strong>Intuición Matemática: </strong>
-                  Observa que todas las columnas de gradiente suman exactamente <strong>0</strong>. Si sumas verticalmente, es 0 porque al final, cualquier pequeño aumento en la suma del logit se contrarresta perfectamente ya que la suma total de las probabilidades está atada a ser siempre 1.0!
+                  <strong>Intuición matemática:</strong>
+                  cada columna de la Jacobiana suma <strong>0</strong>. Esto refleja la restricción del simplex: el vector de probabilidades siempre debe conservar suma unitaria.
                 </p>
               </div>
             </div>
@@ -200,9 +200,10 @@ export default function SoftmaxGradientModule() {
       <div className="bg-gradient-to-br from-indigo-950 to-slate-900 border border-slate-900 dark:border-slate-800 text-white rounded-xl p-5 md:p-6 mt-6 shadow-md dark:shadow-xl flex flex-col md:flex-row items-center gap-6 font-sans">
         <div className="space-y-2 md:w-2/3">
           <h4 className="text-xs font-bold uppercase tracking-widest text-indigo-300 font-mono">¿Cómo Funciona el Entrenamiento Real?</h4>
-          <h5 className="font-display font-medium text-lg text-white">El Milagro de Softmax con Entropía Cruzada</h5>
+          <h5 className="font-display font-medium text-lg text-white">Softmax + Entropía cruzada: simplificación del gradiente</h5>
           <p className="text-xs text-indigo-200 leading-relaxed font-sans">
-            En LLMs, Softmax se asocia siempre con la función de pérdida de <strong>Entropía Cruzada</strong>: <span className="font-serif italic text-white">L = -log(P<sub>correcto</sub>)</span>. Al aplicar la regla de la cadena para calcular el mapa de retropropagación con respecto a los logits, los descritos <span className="font-serif italic text-white font-semibold">p<sub>i</sub></span> y <span className="font-serif italic text-white font-semibold">p<sub>j</sub></span> se cancelan mágicamente dando:
+            En entrenamiento supervisado, la salida Softmax suele combinarse con <strong>entropía cruzada categórica</strong>:
+            <span className="font-serif italic text-white"> L = -log(P<sub>correcto</sub>)</span>. Aplicando regla de la cadena sobre logits, el gradiente se reduce a una forma compacta:
           </p>
           <div className="py-2 px-4 bg-white/10 rounded-lg border border-white/10 text-center text-sm text-indigo-150 font-serif flex items-center justify-center gap-1.5 select-none font-bold">
             <div className="inline-flex flex-col items-center text-xs">
@@ -215,7 +216,8 @@ export default function SoftmaxGradientModule() {
             <span className="italic">Y<sub>i</sub></span>
           </div>
           <p className="text-xs text-indigo-200 leading-relaxed font-sans">
-            Donde <span className="font-serif italic text-white font-semibold">Y<sub>i</sub></span> es el vector objetivo verdadero (<span className="font-serif text-white">1.0</span> para el token correcto, <span className="font-serif text-white">0.0</span> para los demás). El gradiente es sencillamente la <strong>"Probabilidad calculada menos la Probabilidad esperada"</strong>. ¡Esta elegante simplicidad es lo que permite entrenar LLMs gigantes muy rápido!
+            Donde <span className="font-serif italic text-white font-semibold">Y<sub>i</sub></span> es el objetivo one-hot. El término
+            <strong> P<sub>i</sub> - Y<sub>i</sub></strong> mide error probabilístico por clase y fundamenta la eficiencia numérica de implementaciones modernas.
           </p>
         </div>
 
@@ -251,8 +253,9 @@ export default function SoftmaxGradientModule() {
       </div>
 
       <div className="p-4 rounded-xl border border-emerald-200 dark:border-emerald-900/40 bg-emerald-50 dark:bg-emerald-950/20 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-        <span className="font-semibold text-slate-900 dark:text-slate-100">Nota de rigor:</span> la formulación coincide con la atención escalada usada en Transformers:
-        la normalización Softmax se aplica sobre scores y conserva suma total 1. En entrenamiento, se combina con entropía cruzada y se calcula con versiones numéricamente estables.
+        <span className="font-semibold text-slate-900 dark:text-slate-100">Nota de rigor:</span> en Transformers, Softmax aparece tanto en atención (sobre scores escalados)
+        como en la capa de salida (sobre logits). En ambos casos se implementa con el truco de estabilidad
+        <strong> Softmax(z - max(z))</strong> para evitar overflow y pérdida de precisión en coma flotante.
       </div>
     </div>
   );

@@ -7,10 +7,10 @@ import { EXAMPLE_PROMPTS } from "../constants/temperature";
 const DEFAULT_PROMPT = "Había una vez un";
 const DEFAULT_TEMP = 0.7;
 const TEMPERATURE_INTERPRETATIONS: { min: number; max: number; badge: string; text: string; color: string }[] = [
-  { min: 0, max: 0.3, badge: "Altamente Conservador (Argmax)", text: "El modelo se vuelve sumamente determinista. Casi todo el peso se reduce al token número 1 (menor entropía).", color: "text-teal-400 bg-teal-500/10 border-teal-500/20" },
-  { min: 0.3, max: 0.8, badge: "Balanceado (Estándar)", text: "Puntaje por defecto de lenguaje natural humano. Conserva coherencia gramatical estricta pero abre camino a cambios de palabras ricos.", color: "text-purple-700 dark:text-purple-300 bg-purple-500/10 border-purple-500/20" },
-  { min: 0.8, max: 1.4, badge: "Creativo (Inferencia Libre)", text: "Las diferencias exponenciales se suavizan progresivamente. Los tokens con menos relevancia semántica ganan tracción significativa.", color: "text-amber-400 bg-amber-500/10 border-amber-500/20" },
-  { min: 1.4, max: 99, badge: "Caótico (Entropía alta / Ruido)", text: "La distribución se aplana por completo hacia una uniforme. El modelo puede derivar rápidamente en sinsentido.", color: "text-rose-400 bg-rose-500/10 border-rose-500/20" },
+  { min: 0, max: 0.3, badge: "Baja entropía (casi Argmax)", text: "La distribución se concentra en los tokens de mayor logit. Disminuye la varianza del muestreo y aumenta la repetibilidad de salida.", color: "text-teal-400 bg-teal-500/10 border-teal-500/20" },
+  { min: 0.3, max: 0.8, badge: "Régimen balanceado", text: "Mantiene coherencia sintáctica y semántica con diversidad moderada. Suele ser una zona robusta para texto general.", color: "text-purple-700 dark:text-purple-300 bg-purple-500/10 border-purple-500/20" },
+  { min: 0.8, max: 1.4, badge: "Alta diversidad controlada", text: "Reduce diferencias relativas entre logits, incrementa entropía y permite explorar continuaciones menos dominantes.", color: "text-amber-400 bg-amber-500/10 border-amber-500/20" },
+  { min: 1.4, max: 99, badge: "Entropía extrema", text: "La distribución se aproxima a una casi uniforme. Aumenta cobertura léxica, pero también el riesgo de incoherencia local.", color: "text-rose-400 bg-rose-500/10 border-rose-500/20" },
 ];
 
 export default function TemperatureSimulator() {
@@ -77,7 +77,7 @@ export default function TemperatureSimulator() {
           </div>
           <div>
             <h2 className="text-lg md:text-xl font-display font-medium text-slate-900 dark:text-white">Inferencia de Temperatura en Acción</h2>
-            <p className="text-sm text-slate-600 dark:text-slate-400 font-sans">Escala los logits en tiempo real y observa cómo el azar esculpe los textos autocompletados</p>
+            <p className="text-sm text-slate-600 dark:text-slate-400 font-sans">Reescala logits en tiempo real y analiza cómo varían entropía, diversidad y estabilidad en el proceso de decoding</p>
           </div>
         </div>
         {warningMsg && (
@@ -121,7 +121,7 @@ export default function TemperatureSimulator() {
               <span className="font-bold text-rose-600 dark:text-rose-400">2.5 (Caótico)</span>
             </div>
             <div className={`p-3.5 rounded-xl border text-xs space-y-1.5 transition-colors duration-200 font-sans ${interpretation.color}`}>
-              <div className="font-bold uppercase tracking-widest text-xs font-sans">Efecto: {interpretation.badge}</div>
+              <div className="font-bold uppercase tracking-widest text-xs font-sans">Régimen: {interpretation.badge}</div>
               <p className="leading-relaxed text-slate-700 dark:text-slate-300">{interpretation.text}</p>
             </div>
           </div>
@@ -188,7 +188,7 @@ export default function TemperatureSimulator() {
                 <span className="text-xs text-slate-500 dark:text-slate-400 font-bold font-sans uppercase tracking-wider">Muestreo ponderado de Monte Carlo</span>
               </div>
               <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-sans">
-                Asombroso: los modelos no seleccionan siempre la mayor probabilidad ("Argmax"). En cambio, hacen girar una "ruleta" donde el tamaño de cada arco está determinado por la probabilidad de Softmax. ¡Prueba tú mismo el giro de sampling!
+                En inferencia autoregresiva, el siguiente token se obtiene mediante muestreo sobre la distribución Softmax (no necesariamente por Argmax). Esta simulación aproxima ese mecanismo con una extracción discreta ponderada por probabilidad.
               </p>
               <div className="flex flex-col sm:flex-row items-center gap-4 py-1">
                 <button onClick={executeSampling} disabled={isSampling || isPredicting} className="w-full sm:w-auto px-5 py-3 bg-purple-700 hover:bg-purple-600 disabled:bg-slate-200 disabled:text-slate-400 text-white rounded-xl text-sm font-semibold shadow-lg inline-flex items-center justify-center gap-2 transition-all active:scale-[0.98] font-mono cursor-pointer">
@@ -207,7 +207,7 @@ export default function TemperatureSimulator() {
                   </div>
                 ) : (
                   <div className="text-xs text-slate-500 dark:text-slate-300 italic text-center sm:text-left flex-1 py-2">
-                    {isSampling ? "Buscando azar ponderado numérico en la campana..." : "Haz clic para probar los resultados del azar."}
+                    {isSampling ? "Ejecutando muestreo ponderado sobre la distribución..." : "Ejecuta una muestra para observar el efecto estocástico."}
                   </div>
                 )}
               </div>
