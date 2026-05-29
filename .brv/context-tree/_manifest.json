@@ -1,0 +1,217 @@
+{
+  "active_context": [
+    {
+      "order": 3,
+      "path": "_index.md",
+      "tokens": 752,
+      "type": "summary"
+    },
+    {
+      "order": 2,
+      "path": "api_routes/_index.md",
+      "tokens": 269,
+      "type": "summary"
+    },
+    {
+      "order": 2,
+      "path": "architecture/_index.md",
+      "tokens": 443,
+      "type": "summary"
+    },
+    {
+      "order": 2,
+      "path": "hooks/_index.md",
+      "tokens": 377,
+      "type": "summary"
+    },
+    {
+      "order": 2,
+      "path": "types/_index.md",
+      "tokens": 96,
+      "type": "summary"
+    },
+    {
+      "order": 1,
+      "path": "hooks/overview/_index.md",
+      "tokens": 37,
+      "type": "summary"
+    },
+    {
+      "abstractPath": "api_routes/token_prediction/token_prediction_endpoint.abstract.md",
+      "abstractTokens": 1,
+      "importance": 50,
+      "path": "api_routes/token_prediction/token_prediction_endpoint.md",
+      "tokens": 1,
+      "type": "context"
+    },
+    {
+      "abstractPath": "api_routes/tutor_chat/ai_tutor_chat_endpoint.abstract.md",
+      "abstractTokens": 1,
+      "importance": 50,
+      "path": "api_routes/tutor_chat/ai_tutor_chat_endpoint.md",
+      "tokens": 1,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "api_routes/tutor_chat/context.md",
+      "tokens": 78,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "architecture/centralized-gemini-api-client-with-graceful-degradation.md",
+      "tokens": 435,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "architecture/llm_math_tutor/architectural_analysis_and_refactoring_plan.md",
+      "tokens": 954,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "architecture/type-safe-client-server-api-layer.md",
+      "tokens": 397,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "hooks/context.md",
+      "tokens": 87,
+      "type": "context"
+    },
+    {
+      "abstractPath": "hooks/overview/react_hooks_domain.abstract.md",
+      "abstractTokens": 0,
+      "importance": 50,
+      "path": "hooks/overview/react_hooks_domain.md",
+      "tokens": 0,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "hooks/seo/context.md",
+      "tokens": 28,
+      "type": "context"
+    },
+    {
+      "abstractPath": "hooks/seo/userouteseo_hook.abstract.md",
+      "abstractTokens": 0,
+      "importance": 50,
+      "path": "hooks/seo/userouteseo_hook.md",
+      "tokens": 0,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "hooks/softmax/context.md",
+      "tokens": 28,
+      "type": "context"
+    },
+    {
+      "abstractPath": "hooks/softmax/usesoftmax_hook.abstract.md",
+      "abstractTokens": 0,
+      "importance": 50,
+      "path": "hooks/softmax/usesoftmax_hook.md",
+      "tokens": 0,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "hooks/tutor_chat/context.md",
+      "tokens": 30,
+      "type": "context"
+    },
+    {
+      "abstractPath": "hooks/tutor_chat/usetutorchat_hook.abstract.md",
+      "abstractTokens": 0,
+      "importance": 50,
+      "path": "hooks/tutor_chat/usetutorchat_hook.md",
+      "tokens": 0,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "hooks/use_temperature/context.md",
+      "tokens": 50,
+      "type": "context"
+    },
+    {
+      "abstractPath": "hooks/use_temperature/usetemperature_hook.abstract.md",
+      "abstractTokens": 0,
+      "importance": 50,
+      "path": "hooks/use_temperature/usetemperature_hook.md",
+      "tokens": 0,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "project/context.md",
+      "tokens": 87,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "project/overview/context.md",
+      "tokens": 69,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "project/overview/llm_math_tutor.md",
+      "tokens": 550,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "services/api/api_client_service.md",
+      "tokens": 271,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "services/gemini/context.md",
+      "tokens": 53,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "services/gemini/gemini_ai_client.md",
+      "tokens": 658,
+      "type": "context"
+    },
+    {
+      "abstractPath": "types/api/api_data_structures.abstract.md",
+      "abstractTokens": 1,
+      "importance": 50,
+      "path": "types/api/api_data_structures.md",
+      "tokens": 1,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "ui_components/context.md",
+      "tokens": 68,
+      "type": "context"
+    },
+    {
+      "abstractPath": "utils/math/mathematical_utility_functions.abstract.md",
+      "abstractTokens": 1,
+      "importance": 50,
+      "path": "utils/math/mathematical_utility_functions.md",
+      "tokens": 1,
+      "type": "context"
+    }
+  ],
+  "generated_at": "2026-05-29T12:51:38.078Z",
+  "lane_tokens": {
+    "contexts": 3847,
+    "stubs": 0,
+    "summaries": 1974
+  },
+  "source_fingerprint": "662188b1af9b1ab0e13be1be02dc14b1f8f1038eba3f44e2dd607915c527bce5",
+  "total_tokens": 5821,
+  "version": 1
+}

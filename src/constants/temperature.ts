@@ -19,3 +19,10 @@ export const FALLBACK_CANDIDATES = [
 ];
 
 export const DEFAULT_LOGITS = [7.0, 4.0, 3.0, 1.0] as const;
+
+export const TEMPERATURE_INTERPRETATIONS: { min: number; max: number; badge: string; text: string; color: string }[] = [
+  { min: 0, max: 0.3, badge: "Baja entropía (casi Argmax)", text: "La distribución se concentra en los tokens de mayor logit. Disminuye la varianza del muestreo y aumenta la repetibilidad de salida.", color: "text-teal-400 bg-teal-500/10 border-teal-500/20" },
+  { min: 0.3, max: 0.8, badge: "Régimen balanceado", text: "Mantiene coherencia sintáctica y semántica con diversidad moderada. Suele ser una zona robusta para texto general.", color: "text-purple-700 dark:text-purple-300 bg-purple-500/10 border-purple-500/20" },
+  { min: 0.8, max: 1.4, badge: "Alta diversidad controlada", text: "Reduce diferencias relativas entre logits, incrementa entropía y permite explorar continuaciones menos dominantes.", color: "text-amber-400 bg-amber-500/10 border-amber-500/20" },
+  { min: 1.4, max: 99, badge: "Entropía extrema", text: "La distribución se aproxima a una casi uniforme. Aumenta cobertura léxica, pero también el riesgo de incoherencia local.", color: "text-rose-400 bg-rose-500/10 border-rose-500/20" },
+];

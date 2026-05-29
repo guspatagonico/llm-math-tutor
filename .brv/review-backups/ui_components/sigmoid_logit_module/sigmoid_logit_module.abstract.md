@@ -1,0 +1,1 @@
+The SigmoidLogitModule is an interactive React component that provides an educational visualization of how logits are converted to probabilities via the sigmoid function.
