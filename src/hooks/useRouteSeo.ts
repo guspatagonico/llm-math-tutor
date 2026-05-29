@@ -28,7 +28,7 @@ export function useRouteSeo(pathname: string) {
   useEffect(() => {
     const routeKey = getRouteKey(pathname);
     const meta = ROUTE_META[routeKey];
-    const canonicalPath = pathname === "/" ? "/sigmoide-logit" : pathname;
+    const canonicalPath = pathname === "" ? "/" : pathname;
     const canonicalUrl = `${window.location.origin}${canonicalPath}`;
 
     document.title = meta.title;
@@ -71,7 +71,7 @@ export function useRouteSeo(pathname: string) {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Inicio", item: "/sigmoide-logit" },
+        { "@type": "ListItem", position: 1, name: "Inicio", item: "/" },
         { "@type": "ListItem", position: 2, name: ROUTE_LABEL_BY_KEY[routeKey], item: canonicalPath },
       ],
     };

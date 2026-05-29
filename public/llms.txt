@@ -6,6 +6,7 @@ Proyecto educativo interactivo para explicar matemáticas de modelos de lenguaje
 
 ## Routes
 
+- [Inicio / Learning Path](/)
 - [Sigmoide y Logit](/sigmoide-logit)
 - [Softmax y Física](/softmax-physics)
 - [Temperatura](/temperature)

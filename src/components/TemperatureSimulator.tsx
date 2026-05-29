@@ -215,6 +215,11 @@ export default function TemperatureSimulator() {
           </div>
         </div>
       </div>
+
+      <div className="p-4 rounded-xl border border-amber-200 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+        <span className="font-semibold text-slate-900 dark:text-slate-100">Nota de rigor:</span> la temperatura de esta página actúa en decoding (inferencia),
+        no en entrenamiento. Su efecto principal es reescalar logits antes de Softmax, alterando entropía y diversidad de muestreo; no corrige por sí sola sesgos del modelo.
+      </div>
     </div>
   );
 }

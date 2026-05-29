@@ -1,6 +1,6 @@
 import { TABS } from "./routes";
 
-export type RouteSeoKey = "sigmoid" | "softmax" | "temperature" | "chat";
+export type RouteSeoKey = "home" | "sigmoid" | "softmax" | "temperature" | "chat";
 
 type RouteSeoMeta = {
   title: string;
@@ -17,6 +17,35 @@ type RouteSeoMeta = {
 export const TODAY_ISO = new Date().toISOString().split("T")[0];
 
 export const ROUTE_META: Record<RouteSeoKey, RouteSeoMeta> = {
+  home: {
+    title: "LLM Math Tutor - Ruta de aprendizaje en IA, ML y LLMs",
+    description:
+      "Página de inicio con ruta visual de aprendizaje para entender cómo encajan Sigmoide, Softmax, Gradientes y Temperatura dentro del panorama IA/ML/LLMs.",
+    keywords:
+      "llm math tutor, ruta de aprendizaje ia, fundamentos llm, probabilidad, algebra lineal, calculo",
+    ogTitle: "LLM Math Tutor: mapa de aprendizaje para matemáticas de LLMs",
+    ogDescription:
+      "Explora una guía visual con objetivos didácticos, prerrequisitos y módulos interactivos para estudiar fundamentos matemáticos de LLMs.",
+    ogImage: "/og/home.svg",
+    tldr:
+      "Comienza aquí para ubicar el mapa completo IA → ML → Transformers → Inferencia, luego recorre módulos en orden didáctico con foco en fundamentos matemáticos.",
+    faq: [
+      {
+        question: "¿Qué nivel necesito para seguir esta ruta?",
+        answer:
+          "Está pensada para nivel intermedio: álgebra básica, nociones de derivadas e integrales, y probabilidad descriptiva. No requiere experiencia previa entrenando LLMs.",
+      },
+      {
+        question: "¿En qué orden conviene estudiar los módulos?",
+        answer:
+          "Primero Sigmoide y Logit, luego Softmax y Jacobiano, después Temperatura de inferencia y finalmente Tutor IA para consolidar dudas con ejemplos concretos.",
+      },
+    ],
+    references: [
+      { label: "Attention Is All You Need (Vaswani et al., 2017)", href: "https://arxiv.org/html/1706.03762v7" },
+      { label: "AI Engineering from Scratch - Probability and Distributions", href: "https://aiengineeringfromscratch.com/lesson.html?path=phases%2F01-math-foundations%2F06-probability-and-distributions" },
+    ],
+  },
   sigmoid: {
     title: "Sigmoide y Logit en LLMs - Simulador Interactivo",
     description:
@@ -136,7 +165,7 @@ export const ROUTE_META: Record<RouteSeoKey, RouteSeoMeta> = {
 };
 
 export const ROUTE_KEY_BY_PATH: Record<string, RouteSeoKey> = {
-  "/": "sigmoid",
+  "/": "home",
   "/sigmoide-logit": "sigmoid",
   "/softmax-physics": "softmax",
   "/temperature": "temperature",
@@ -144,6 +173,7 @@ export const ROUTE_KEY_BY_PATH: Record<string, RouteSeoKey> = {
 };
 
 export const ROUTE_LABEL_BY_KEY: Record<RouteSeoKey, string> = {
+  home: "Inicio",
   sigmoid: "Sigmoide y Logit",
   softmax: "Softmax y Física",
   temperature: "Temperatura",

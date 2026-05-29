@@ -226,6 +226,12 @@ export default function SigmoidLogitModule() {
             <span className="font-bold text-slate-800 dark:text-slate-200 font-sans">Resumen de Mapeo:</span> Al representar los scores antes de la salida como logits (reales infinitos), las redes entrenan linealmente y con facilidad. La Sigmoide actúa como el portal de traducción de probabilidades binarias. Para vocabularios masivos multiclase, generalizamos este patrón con <strong>Softmax</strong>, regulando el reparto probabilístico.
           </div>
         </div>
+
+        <div className="mt-4 p-3 rounded-xl border border-indigo-200 dark:border-indigo-900/40 bg-indigo-50 dark:bg-indigo-950/20 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+          <span className="font-semibold text-slate-900 dark:text-slate-100">Nota de rigor:</span> en la práctica, para evitar inestabilidad numérica,
+          se implementan variantes estables de Sigmoide y Logit (por ejemplo, evitando evaluar directamente extremos como p≈0 o p≈1).
+          Esta recomendación está alineada con textos clásicos de aprendizaje profundo.
+        </div>
       </div>
     </div>
   );

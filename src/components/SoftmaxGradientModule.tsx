@@ -249,6 +249,11 @@ export default function SoftmaxGradientModule() {
           </div>
         </div>
       </div>
+
+      <div className="p-4 rounded-xl border border-emerald-200 dark:border-emerald-900/40 bg-emerald-50 dark:bg-emerald-950/20 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+        <span className="font-semibold text-slate-900 dark:text-slate-100">Nota de rigor:</span> la formulación coincide con la atención escalada usada en Transformers:
+        la normalización Softmax se aplica sobre scores y conserva suma total 1. En entrenamiento, se combina con entropía cruzada y se calcula con versiones numéricamente estables.
+      </div>
     </div>
   );
 }

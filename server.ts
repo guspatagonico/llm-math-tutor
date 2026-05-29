@@ -9,10 +9,6 @@ const PORT = 3000;
 
 app.use(express.json());
 
-app.get("/", (_req, res) => {
-  res.redirect(302, "/sigmoide-logit");
-});
-
 app.post("/api/predict-tokens", handlePredictTokens);
 app.post("/api/tutor-chat", handleTutorChat);
 

@@ -13,6 +13,15 @@ const today = new Date().toISOString().split("T")[0];
 
 const routes = [
   {
+    path: "/",
+    title: "LLM Math Tutor - Ruta de aprendizaje en IA, ML y LLMs",
+    description:
+      "Página de inicio con una ruta visual para ubicar Sigmoide, Softmax, Gradientes y Temperatura dentro del panorama IA/ML/LLMs.",
+    keywords: "llm math tutor, ruta de aprendizaje, ia, ml, probabilidad, transformers",
+    ogImage: "/og/home.svg",
+    h1: "Ruta de aprendizaje para matemáticas de LLMs",
+  },
+  {
     path: "/sigmoide-logit",
     title: "Sigmoide y Logit en LLMs - Simulador Interactivo",
     description:
@@ -184,22 +193,22 @@ for (const route of routes) {
   fs.writeFileSync(path.join(ogDir, route.ogImage.split("/").pop()), svg, "utf8");
 }
 
-const rootHtml = buildRouteHtml(routes[0]);
+  const rootHtml = buildRouteHtml(routes[0]);
 fs.writeFileSync(path.join(distDir, "index.html"), rootHtml);
 
-const sitemapBody = ["/sigmoide-logit", "/softmax-physics", "/temperature", "/ia-tutor"]
+const sitemapBody = ["/", "/sigmoide-logit", "/softmax-physics", "/temperature", "/ia-tutor"]
   .map(
     (routePath) => `<url><loc>${routePath}</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>`
   )
   .join("");
 
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>/sigmoide-logit</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>${sitemapBody}</urlset>`;
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemapBody}</urlset>`;
 fs.writeFileSync(path.join(distDir, "sitemap.xml"), sitemap, "utf8");
 
 const robots = "User-agent: *\nAllow: /\n";
 fs.writeFileSync(path.join(distDir, "robots.txt"), robots, "utf8");
 
-const llmsTxt = `# LLM Math Tutor\n\n## Summary\n\nProyecto educativo interactivo para explicar matemáticas de modelos de lenguaje (LLMs): Sigmoide, Logit, Softmax, Jacobiano, Gradientes y Temperatura de inferencia.\n\n## Routes\n\n- [Sigmoide y Logit](/sigmoide-logit)\n- [Softmax y Física](/softmax-physics)\n- [Temperatura](/temperature)\n- [Tutor IA](/ia-tutor)\n\n## Metadata\n\n- Idioma: español\n- Autor: Gustavo Adrián Salvini\n- Última actualización: ${today}\n`;
+const llmsTxt = `# LLM Math Tutor\n\n## Summary\n\nProyecto educativo interactivo para explicar matemáticas de modelos de lenguaje (LLMs): Sigmoide, Logit, Softmax, Jacobiano, Gradientes y Temperatura de inferencia.\n\n## Routes\n\n- [Inicio / Learning Path](/)\n- [Sigmoide y Logit](/sigmoide-logit)\n- [Softmax y Física](/softmax-physics)\n- [Temperatura](/temperature)\n- [Tutor IA](/ia-tutor)\n\n## Metadata\n\n- Idioma: español\n- Autor: Gustavo Adrián Salvini\n- Última actualización: ${today}\n`;
 fs.writeFileSync(path.join(distDir, "llms.txt"), llmsTxt, "utf8");
 
 console.log("SEO/SSG assets generados para rutas estáticas.");

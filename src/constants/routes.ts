@@ -1,4 +1,4 @@
-import { Activity, Network, Flame, MessageSquare, LucideIcon } from "lucide-react";
+import { House, Activity, Network, Flame, MessageSquare, LucideIcon } from "lucide-react";
 
 export interface TabConfig {
   id: string;
@@ -8,6 +8,7 @@ export interface TabConfig {
 }
 
 export const TABS: TabConfig[] = [
+  { id: "home", path: "/", label: "Inicio", icon: House },
   { id: "sigmoid", path: "/sigmoide-logit", label: "Sigmoide y Logit", icon: Activity },
   { id: "softmax", path: "/softmax-physics", label: "Softmax & Física", icon: Network },
   { id: "temperature", path: "/temperature", label: "Temperatura", icon: Flame },
