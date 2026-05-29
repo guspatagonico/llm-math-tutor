@@ -17,6 +17,7 @@ export default function AITutorChat() {
 
   return (
     <div id="ai-tutor-chat" className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm rounded-2xl overflow-hidden flex flex-col h-[520px] transition-colors duration-300 font-sans">
+      <h1 className="sr-only">Tutor IA para matematicas de modelos de lenguaje</h1>
       <div className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 p-4 flex justify-between items-center shrink-0">
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-lg bg-indigo-600 dark:bg-indigo-700 text-white flex items-center justify-center shadow">

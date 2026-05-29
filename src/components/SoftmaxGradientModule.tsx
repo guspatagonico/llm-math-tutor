@@ -26,6 +26,7 @@ export default function SoftmaxGradientModule() {
 
   return (
     <div id="softmax-gradient-module" className="bg-white dark:bg-slate-900/60 rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-slate-800/80 shadow-md dark:shadow-xl dark:backdrop-blur-sm transition-colors duration-300 space-y-8 font-sans">
+      <h1 className="sr-only">Softmax, Jacobiano y gradientes en modelos de lenguaje</h1>
       <div className="flex items-center gap-3">
         <div className="p-3 bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20 rounded-xl">
           <Network className="w-6 h-6" />

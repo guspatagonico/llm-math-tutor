@@ -13,16 +13,21 @@ export default function TabNav({ activeTab, onNavigate }: TabNavProps) {
         const Icon = tab.icon;
         const isActive = activeTab === tab.id;
         return (
-          <button
+          <a
             key={tab.id}
-            onClick={() => onNavigate(tab.id)}
+            href={tab.path}
+            onClick={(event) => {
+              event.preventDefault();
+              onNavigate(tab.id);
+            }}
             className={`flex items-center gap-1.5 px-3 py-2 min-h-[36px] rounded-lg text-xs font-semibold transition-all cursor-pointer ${
               isActive ? "bg-slate-800 text-white shadow-sm" : "text-slate-400 hover:text-slate-200"
             }`}
+            aria-current={isActive ? "page" : undefined}
           >
             <Icon className="w-3.5 h-3.5" />
             <span>{tab.label}</span>
-          </button>
+          </a>
         );
       })}
     </nav>

@@ -1,0 +1,17 @@
+# LLM Math Tutor
+
+## Summary
+
+Proyecto educativo interactivo para explicar matemáticas de modelos de lenguaje (LLMs): Sigmoide, Logit, Softmax, Jacobiano, Gradientes y Temperatura de inferencia.
+
+## Routes
+
+- [Sigmoide y Logit](/sigmoide-logit)
+- [Softmax y Física](/softmax-physics)
+- [Temperatura](/temperature)
+- [Tutor IA](/ia-tutor)
+
+## Metadata
+
+- Idioma: español
+- Autor: Gustavo Adrián Salvini

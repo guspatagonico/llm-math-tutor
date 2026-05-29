@@ -6,7 +6,10 @@ import AITutorChat from "./components/AITutorChat";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import PathwayBanner from "./components/PathwayBanner";
+import SeoBlocks from "./components/SeoBlocks";
 import { TABS, DEFAULT_TAB } from "./constants/routes";
+import { useRouteSeo, getRouteKey } from "./hooks/useRouteSeo";
+import type { RouteSeoKey } from "./constants/seo";
 
 const pathToTabId = new Map(TABS.map((t) => [t.path, t.id]));
 const tabIdToPath = new Map(TABS.map((t) => [t.id, t.path]));
@@ -25,6 +28,15 @@ const TAB_COMPONENTS: Record<string, React.FC> = {
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>(() => getTabFromPath(window.location.pathname));
+
+  useRouteSeo(window.location.pathname);
+
+  const routeKeyByTab: Record<string, RouteSeoKey> = {
+    sigmoid: "sigmoid",
+    softmax: "softmax",
+    temperature: "temperature",
+    chat: "chat",
+  };
 
   useEffect(() => {
     document.documentElement.classList.add("dark");
@@ -50,6 +62,7 @@ export default function App() {
   };
 
   const ActiveComponent = TAB_COMPONENTS[activeTab] || SigmoidLogitModule;
+  const activeRouteKey = routeKeyByTab[activeTab] || getRouteKey(window.location.pathname);
 
   return (
     <div className="min-h-screen transition-colors duration-300 bg-slate-950 text-slate-300 selection:bg-indigo-100 font-sans pb-16 dark">
@@ -59,6 +72,7 @@ export default function App() {
         <div className="transition-opacity duration-300">
           <ActiveComponent />
         </div>
+        <SeoBlocks routeKey={activeRouteKey} />
         <Footer />
       </main>
     </div>

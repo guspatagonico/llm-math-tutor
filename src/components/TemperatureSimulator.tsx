@@ -69,6 +69,7 @@ export default function TemperatureSimulator() {
 
   return (
     <div id="temperature-simulator" className="bg-white dark:bg-slate-900/60 rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-slate-800/80 shadow-md dark:shadow-xl dark:backdrop-blur-sm transition-colors duration-300 space-y-8 font-sans">
+      <h1 className="sr-only">Temperatura de inferencia y sampling en LLMs</h1>
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div className="flex items-center gap-3">
           <div className="p-3 bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20 rounded-xl">

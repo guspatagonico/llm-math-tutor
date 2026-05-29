@@ -18,6 +18,24 @@ import {createRoot} from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 
+const analyticsMeasurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
+
+if (analyticsMeasurementId) {
+  const gtagScript = document.createElement("script");
+  gtagScript.async = true;
+  gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${analyticsMeasurementId}`;
+  document.head.appendChild(gtagScript);
+
+  const inlineScript = document.createElement("script");
+  inlineScript.text = `
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${analyticsMeasurementId}');
+  `;
+  document.head.appendChild(inlineScript);
+}
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />

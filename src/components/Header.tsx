@@ -16,7 +16,7 @@ export default function Header({ activeTab, onNavigate }: HeaderProps) {
             <GraduationCap className="w-5 h-5" />
           </div>
           <div>
-            <h1 className="text-xl md:text-2xl font-display font-bold text-slate-200 dark:text-white tracking-tight flex items-center gap-1.5 flex-wrap">
+            <div className="text-xl md:text-2xl font-display font-bold text-slate-200 dark:text-white tracking-tight flex items-center gap-1.5 flex-wrap">
               LLM Math Tutor
               <span className="text-[10px] bg-indigo-950/40 text-purple-300 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider font-sans border border-purple-500/10">
                 Aula Interactiva
@@ -25,7 +25,7 @@ export default function Header({ activeTab, onNavigate }: HeaderProps) {
                 <Github className="w-3.5 h-3.5 shrink-0" />
                 Gustavo A. Salvini
               </a>
-            </h1>
+            </div>
             <p className="text-xs text-slate-400 font-medium font-sans leading-relaxed">
               Logits, Sigmoid, Softmax, Gradientes y Temperatura de Inferencia
             </p>

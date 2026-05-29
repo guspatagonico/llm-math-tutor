@@ -38,6 +38,7 @@ export default function SigmoidLogitModule() {
 
   return (
     <div id="sigmoid-logit-module" className="space-y-8">
+      <h1 className="sr-only">Funcion Sigmoide y Logit para modelos de lenguaje</h1>
       <div className="bg-white dark:bg-slate-900/60 rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-slate-800/80 shadow-md dark:shadow-xl dark:backdrop-blur-sm transition-colors duration-300 font-sans">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-3 bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 rounded-xl">
