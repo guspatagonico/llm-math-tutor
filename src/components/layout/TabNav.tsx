@@ -1,5 +1,5 @@
 import React from "react";
-import { TABS } from "../../constants/routes";
+import { TABS, fullPath } from "../../constants/routes";
 
 interface TabNavProps {
   activeTab: string;
@@ -15,7 +15,7 @@ export default function TabNav({ activeTab, onNavigate }: TabNavProps) {
         return (
           <a
             key={tab.id}
-            href={tab.path}
+            href={fullPath(tab.path)}
             onClick={(event) => {
               event.preventDefault();
               onNavigate(tab.id);

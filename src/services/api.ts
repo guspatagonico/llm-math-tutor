@@ -1,9 +1,13 @@
 import { Candidate, PredictTokensResponse, TutorChatResponse } from "../types";
 
-const API_BASE = "";
+const isDev = import.meta.env.DEV;
 
-async function request<T>(endpoint: string, body: unknown): Promise<T> {
-  const response = await fetch(`${API_BASE}${endpoint}`, {
+async function request<T>(action: string, body: unknown): Promise<T> {
+  const url = isDev
+    ? `/api/${action}`
+    : `/backend/api-proxy.php?action=${action}`;
+
+  const response = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
@@ -19,9 +23,9 @@ async function request<T>(endpoint: string, body: unknown): Promise<T> {
 }
 
 export async function predictTokens(prompt: string): Promise<PredictTokensResponse> {
-  return request<PredictTokensResponse>("/api/predict-tokens", { prompt });
+  return request<PredictTokensResponse>("predict-tokens", { prompt });
 }
 
 export async function tutorChat(messages: { sender: string; text: string }[]): Promise<TutorChatResponse> {
-  return request<TutorChatResponse>("/api/tutor-chat", { messages });
+  return request<TutorChatResponse>("tutor-chat", { messages });
 }

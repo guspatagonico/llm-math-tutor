@@ -1,5 +1,6 @@
 import React from "react";
 import { GraduationCap, Github } from "lucide-react";
+import { fullPath } from "../../constants/routes";
 import TabNav from "./TabNav";
 
 interface HeaderProps {
@@ -12,12 +13,12 @@ export default function Header({ activeTab, onNavigate }: HeaderProps) {
     <header className="bg-slate-900 border-b border-slate-800/80 sticky top-0 z-30 shadow-subtle backdrop-blur-md transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-3 sm:px-4 py-3 sm:py-4 flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4">
         <div className="flex items-center gap-2 sm:gap-3">
-          <a href="/" className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-700 to-indigo-500 text-white flex items-center justify-center shadow-md shrink-0" aria-label="Ir al inicio">
+          <a href={fullPath("/")} className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-700 to-indigo-500 text-white flex items-center justify-center shadow-md shrink-0" aria-label="Ir al inicio">
             <GraduationCap className="w-5 h-5" />
           </a>
           <div>
             <div className="text-lg sm:text-xl md:text-2xl font-display font-bold text-slate-200 dark:text-white tracking-tight flex items-center gap-1.5 flex-wrap">
-              <a href="/" className="hover:underline whitespace-nowrap">LLM Math Tutor</a>
+              <a href={fullPath("/")} className="hover:underline whitespace-nowrap">LLM Math Tutor</a>
               <span className="text-[10px] bg-indigo-950/40 text-purple-300 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider font-sans border border-purple-500/10 whitespace-nowrap">
                 Aula Interactiva
               </span>

@@ -1,26 +1,28 @@
-import React, { useState, useEffect } from "react";
-import SigmoidLogitModule from "./components/modules/SigmoidLogitModule";
-import SoftmaxGradientModule from "./components/modules/SoftmaxGradientModule";
-import TemperatureSimulator from "./components/modules/TemperatureSimulator";
-import AITutorChat from "./components/modules/AITutorChat";
-import HomeLearningPath from "./components/modules/HomeLearningPath";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import PathwayBanner from "./components/shared/PathwayBanner";
 import SeoBlocks from "./components/shared/SeoBlocks";
-import { TABS, DEFAULT_TAB } from "./constants/routes";
+import { TABS, DEFAULT_TAB, fullPath, stripBase } from "./constants/routes";
 import { useRouteSeo, getRouteKey } from "./hooks/useRouteSeo";
 import type { RouteSeoKey } from "./constants/seo";
+import Spinner from "./components/ui/Spinner";
+
+const HomeLearningPath = lazy(() => import("./components/modules/HomeLearningPath"));
+const SigmoidLogitModule = lazy(() => import("./components/modules/SigmoidLogitModule"));
+const SoftmaxGradientModule = lazy(() => import("./components/modules/SoftmaxGradientModule"));
+const TemperatureSimulator = lazy(() => import("./components/modules/TemperatureSimulator"));
+const AITutorChat = lazy(() => import("./components/modules/AITutorChat"));
 
 const pathToTabId = new Map(TABS.map((t) => [t.path, t.id]));
 const tabIdToPath = new Map(TABS.map((t) => [t.id, t.path]));
 
 function getTabFromPath(pathname: string): string {
-  const cleaned = pathname !== "/" && pathname.endsWith("/") ? pathname.slice(0, -1) : pathname;
+  const cleaned = stripBase(pathname);
   return pathToTabId.get(cleaned) || DEFAULT_TAB.id;
 }
 
-const TAB_COMPONENTS: Record<string, React.FC> = {
+const TAB_COMPONENTS: Record<string, React.LazyExoticComponent<React.FC>> = {
   home: HomeLearningPath,
   sigmoid: SigmoidLogitModule,
   softmax: SoftmaxGradientModule,
@@ -49,16 +51,16 @@ export default function App() {
     window.addEventListener("popstate", handlePopState);
 
     const currentPath = window.location.pathname;
-    const cleaned = currentPath !== "/" && currentPath.endsWith("/") ? currentPath.slice(0, -1) : currentPath;
+    const cleaned = stripBase(currentPath);
     if (!pathToTabId.has(cleaned)) {
-      window.history.replaceState(null, "", DEFAULT_TAB.path);
+      window.history.replaceState(null, "", fullPath(DEFAULT_TAB.path));
     }
 
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
 
   const navigateTo = (tabId: string) => {
-    const targetPath = tabIdToPath.get(tabId) || DEFAULT_TAB.path;
+    const targetPath = fullPath(tabIdToPath.get(tabId) || DEFAULT_TAB.path);
     if (targetPath !== window.location.pathname) {
       window.history.pushState(null, "", targetPath);
       setActiveTab(tabId);
@@ -75,7 +77,9 @@ export default function App() {
       <main className="max-w-6xl mx-auto px-4 mt-8">
         {!isHome ? <PathwayBanner /> : null}
         <div className="transition-opacity duration-300">
-          <ActiveComponent />
+          <Suspense fallback={<div className="flex justify-center py-20"><Spinner size="md" /></div>}>
+            <ActiveComponent />
+          </Suspense>
         </div>
         <SeoBlocks routeKey={activeRouteKey} />
         <Footer />

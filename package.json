@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "tsx server.ts",
-    "build": "vite build && node scripts/build-seo-assets.mjs && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
+    "dev": "tsx backend/server.ts",
+    "build": "vite build && node scripts/build-seo-assets.mjs && mkdir -p dist-backend && cp backend/api-proxy.php dist-backend/api-proxy.php && cp backend/.env.example dist-backend/.env.example && esbuild backend/server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
     "start": "node dist/server.cjs",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",

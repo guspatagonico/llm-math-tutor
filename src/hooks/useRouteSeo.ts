@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { ROUTE_KEY_BY_PATH, ROUTE_LABEL_BY_KEY, ROUTE_META, TODAY_ISO, type RouteSeoKey } from "../constants/seo";
+import { fullPath, stripBase } from "../constants/routes";
 
 function upsertMeta(selector: string, attributes: Record<string, string>) {
   let tag = document.head.querySelector(selector) as HTMLMetaElement | null;
@@ -20,16 +21,16 @@ function upsertLink(selector: string, attributes: Record<string, string>) {
 }
 
 export function getRouteKey(pathname: string): RouteSeoKey {
-  const cleaned = pathname !== "/" && pathname.endsWith("/") ? pathname.slice(0, -1) : pathname;
+  const cleaned = stripBase(pathname);
   return ROUTE_KEY_BY_PATH[cleaned] || "sigmoid";
 }
 
 export function useRouteSeo(pathname: string) {
   useEffect(() => {
+    const cleaned = stripBase(pathname);
     const routeKey = getRouteKey(pathname);
     const meta = ROUTE_META[routeKey];
-    const canonicalPath = pathname === "" ? "/" : pathname;
-    const canonicalUrl = `${window.location.origin}${canonicalPath}`;
+    const canonicalUrl = `${window.location.origin}${fullPath(cleaned)}`;
 
     document.title = meta.title;
 
@@ -43,12 +44,12 @@ export function useRouteSeo(pathname: string) {
     upsertMeta('meta[property="og:title"]', { property: "og:title", content: meta.ogTitle });
     upsertMeta('meta[property="og:description"]', { property: "og:description", content: meta.ogDescription });
     upsertMeta('meta[property="og:url"]', { property: "og:url", content: canonicalUrl });
-    upsertMeta('meta[property="og:image"]', { property: "og:image", content: meta.ogImage });
+    upsertMeta('meta[property="og:image"]', { property: "og:image", content: `${window.location.origin}${fullPath(meta.ogImage)}` });
 
     upsertMeta('meta[name="twitter:card"]', { name: "twitter:card", content: "summary_large_image" });
     upsertMeta('meta[name="twitter:title"]', { name: "twitter:title", content: meta.ogTitle });
     upsertMeta('meta[name="twitter:description"]', { name: "twitter:description", content: meta.ogDescription });
-    upsertMeta('meta[name="twitter:image"]', { name: "twitter:image", content: meta.ogImage });
+    upsertMeta('meta[name="twitter:image"]', { name: "twitter:image", content: `${window.location.origin}${fullPath(meta.ogImage)}` });
 
     upsertLink('link[rel="canonical"]', { rel: "canonical", href: canonicalUrl });
 
@@ -59,7 +60,7 @@ export function useRouteSeo(pathname: string) {
       "@type": "WebSite",
       name: "LLM Math Tutor",
       inLanguage: "es",
-      url: "/",
+      url: fullPath("/"),
       author: {
         "@type": "Person",
         name: "Gustavo Adrián Salvini",
@@ -71,8 +72,8 @@ export function useRouteSeo(pathname: string) {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Inicio", item: "/" },
-        { "@type": "ListItem", position: 2, name: ROUTE_LABEL_BY_KEY[routeKey], item: canonicalPath },
+        { "@type": "ListItem", position: 1, name: "Inicio", item: fullPath("/") },
+        { "@type": "ListItem", position: 2, name: ROUTE_LABEL_BY_KEY[routeKey], item: fullPath(cleaned) },
       ],
     };
 

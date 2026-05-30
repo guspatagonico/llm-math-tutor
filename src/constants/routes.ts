@@ -16,3 +16,22 @@ export const TABS: TabConfig[] = [
 ];
 
 export const DEFAULT_TAB = TABS[0];
+
+export const BASE_PATH = import.meta.env.DEV ? "/" : (import.meta.env.VITE_BASE_PATH || "/");
+
+export function fullPath(relativePath: string): string {
+  const base = BASE_PATH.endsWith("/") ? BASE_PATH.slice(0, -1) : BASE_PATH;
+  return `${base}${relativePath}`;
+}
+
+export function stripBase(pathname: string): string {
+  const raw = BASE_PATH.endsWith("/") ? BASE_PATH.slice(0, -1) : BASE_PATH;
+  if (raw && raw !== "/" && pathname.startsWith(raw)) {
+    const stripped = pathname.slice(raw.length);
+    return stripped.startsWith("/") ? stripped : `/${stripped}`;
+  }
+  if (pathname !== "/" && pathname.endsWith("/")) {
+    return pathname.slice(0, -1);
+  }
+  return pathname;
+}

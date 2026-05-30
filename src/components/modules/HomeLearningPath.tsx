@@ -1,6 +1,7 @@
 import React from "react";
 import { Compass, Route, BookOpenCheck } from "lucide-react";
 import { PATH_STEPS, MODULE_MAP } from "../../constants/learningPath";
+import { fullPath } from "../../constants/routes";
 import ModuleHeader from "../ui/ModuleHeader";
 import SectionHeading from "../ui/SectionHeading";
 
@@ -49,7 +50,7 @@ export default function HomeLearningPath() {
             return (
               <a
                 key={module.href}
-                href={module.href}
+                href={fullPath(module.href)}
                 className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-indigo-400/60 dark:hover:border-indigo-400/40 bg-slate-50/60 dark:bg-slate-950/40 transition-colors"
               >
                 <div className="flex items-center gap-2 mb-2">

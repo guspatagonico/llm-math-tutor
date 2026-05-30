@@ -4,10 +4,28 @@ import path from "node:path";
 const distDir = path.resolve(process.cwd(), "dist");
 const indexPath = path.join(distDir, "index.html");
 
+// Load .env at project root so VITE_BASE_PATH is available
+try {
+  const envContent = fs.readFileSync(path.resolve(process.cwd(), ".env"), "utf8");
+  for (const line of envContent.split("\n")) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const eqIdx = trimmed.indexOf("=");
+    if (eqIdx === -1) continue;
+    const key = trimmed.slice(0, eqIdx).trim();
+    const val = trimmed.slice(eqIdx + 1).trim().replace(/^["']|["']$/g, "");
+    if (key && !process.env[key]) process.env[key] = val;
+  }
+} catch {}
+
 if (!fs.existsSync(indexPath)) {
   console.error("dist/index.html no existe. Ejecuta vite build antes.");
   process.exit(1);
 }
+
+const BASE_PATH = process.env.VITE_BASE_PATH || "/";
+const baseTrimmed = BASE_PATH.endsWith("/") ? BASE_PATH.slice(0, -1) : BASE_PATH;
+const prefix = (relPath) => `${baseTrimmed}${relPath}`;
 
 const today = new Date().toISOString().split("T")[0];
 
@@ -85,8 +103,8 @@ function toLdJson(route) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Inicio", item: "/sigmoide-logit" },
-      { "@type": "ListItem", position: 2, name: route.h1, item: route.path },
+      { "@type": "ListItem", position: 1, name: "Inicio", item: prefix("/") },
+      { "@type": "ListItem", position: 2, name: route.h1, item: prefix(route.path) },
     ],
   };
   return [learning, breadcrumb]
@@ -124,14 +142,14 @@ function buildRouteHtml(route) {
   html = replaceOrInsert(
     html,
     /<meta\s+property="og:url"\s+content="[^"]*"\s*\/>/i,
-    `<meta property="og:url" content="${route.path}" />`,
-    `<meta property="og:url" content="${route.path}" />`
+    `<meta property="og:url" content="${prefix(route.path)}" />`,
+    `<meta property="og:url" content="${prefix(route.path)}" />`
   );
   html = replaceOrInsert(
     html,
     /<meta\s+property="og:image"\s+content="[^"]*"\s*\/>/i,
-    `<meta property="og:image" content="${route.ogImage}" />`,
-    `<meta property="og:image" content="${route.ogImage}" />`
+    `<meta property="og:image" content="${prefix(route.ogImage)}" />`,
+    `<meta property="og:image" content="${prefix(route.ogImage)}" />`
   );
   html = replaceOrInsert(
     html,
@@ -148,14 +166,14 @@ function buildRouteHtml(route) {
   html = replaceOrInsert(
     html,
     /<meta\s+name="twitter:image"\s+content="[^"]*"\s*\/>/i,
-    `<meta name="twitter:image" content="${route.ogImage}" />`,
-    `<meta name="twitter:image" content="${route.ogImage}" />`
+    `<meta name="twitter:image" content="${prefix(route.ogImage)}" />`,
+    `<meta name="twitter:image" content="${prefix(route.ogImage)}" />`
   );
   html = replaceOrInsert(
     html,
     /<link\s+rel="canonical"\s+href="[^"]*"\s*\/?/i,
-    `<link rel="canonical" href="${route.path}"`,
-    `<link rel="canonical" href="${route.path}" />`
+    `<link rel="canonical" href="${prefix(route.path)}"`,
+    `<link rel="canonical" href="${prefix(route.path)}" />`
   );
 
   const noscript = `<noscript><section><h1>${route.h1}</h1><p>${route.description}</p><p>Actualizado: ${today}</p></section></noscript>`;
@@ -188,7 +206,7 @@ for (const route of routes) {
   <rect width="1200" height="630" fill="url(#g)" />
   <text x="72" y="220" fill="#e2e8f0" font-size="56" font-family="Arial, sans-serif" font-weight="700">LLM Math Tutor</text>
   <text x="72" y="300" fill="#cbd5e1" font-size="42" font-family="Arial, sans-serif">${route.title.replace(/&/g, "y")}</text>
-  <text x="72" y="370" fill="#94a3b8" font-size="30" font-family="Arial, sans-serif">${route.path}</text>
+  <text x="72" y="370" fill="#94a3b8" font-size="30" font-family="Arial, sans-serif">${prefix(route.path)}</text>
 </svg>`;
   fs.writeFileSync(path.join(ogDir, route.ogImage.split("/").pop()), svg, "utf8");
 }
@@ -198,7 +216,7 @@ fs.writeFileSync(path.join(distDir, "index.html"), rootHtml);
 
 const sitemapBody = ["/", "/sigmoide-logit", "/softmax-physics", "/temperature", "/ia-tutor"]
   .map(
-    (routePath) => `<url><loc>${routePath}</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>`
+    (routePath) => `<url><loc>${prefix(routePath)}</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>`
   )
   .join("");
 
@@ -208,7 +226,7 @@ fs.writeFileSync(path.join(distDir, "sitemap.xml"), sitemap, "utf8");
 const robots = "User-agent: *\nAllow: /\n";
 fs.writeFileSync(path.join(distDir, "robots.txt"), robots, "utf8");
 
-const llmsTxt = `# LLM Math Tutor\n\n## Summary\n\nProyecto educativo interactivo para explicar matemáticas de modelos de lenguaje (LLMs): Sigmoide, Logit, Softmax, Jacobiano, Gradientes y Temperatura de inferencia.\n\n## Routes\n\n- [Inicio / Learning Path](/)\n- [Sigmoide y Logit](/sigmoide-logit)\n- [Softmax y Física](/softmax-physics)\n- [Temperatura](/temperature)\n- [Tutor IA](/ia-tutor)\n\n## Metadata\n\n- Idioma: español\n- Autor: Gustavo Adrián Salvini\n- Última actualización: ${today}\n`;
+const llmsTxt = `# LLM Math Tutor\n\n## Summary\n\nProyecto educativo interactivo para explicar matemáticas de modelos de lenguaje (LLMs): Sigmoide, Logit, Softmax, Jacobiano, Gradientes y Temperatura de inferencia.\n\n## Routes\n\n- [Inicio / Learning Path](${prefix("/")})\n- [Sigmoide y Logit](${prefix("/sigmoide-logit")})\n- [Softmax y Física](${prefix("/softmax-physics")})\n- [Temperatura](${prefix("/temperature")})\n- [Tutor IA](${prefix("/ia-tutor")})\n\n## Metadata\n\n- Idioma: español\n- Autor: Gustavo Adrián Salvini\n- Última actualización: ${today}\n`;
 fs.writeFileSync(path.join(distDir, "llms.txt"), llmsTxt, "utf8");
 
 console.log("SEO/SSG assets generados para rutas estáticas.");
