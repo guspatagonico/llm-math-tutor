@@ -27,8 +27,12 @@ export function fullPath(relativePath: string): string {
 export function stripBase(pathname: string): string {
   const raw = BASE_PATH.endsWith("/") ? BASE_PATH.slice(0, -1) : BASE_PATH;
   if (raw && raw !== "/" && pathname.startsWith(raw)) {
-    const stripped = pathname.slice(raw.length);
-    return stripped.startsWith("/") ? stripped : `/${stripped}`;
+    let stripped = pathname.slice(raw.length);
+    stripped = stripped.startsWith("/") ? stripped : `/${stripped}`;
+    if (stripped !== "/" && stripped.endsWith("/")) {
+      stripped = stripped.slice(0, -1);
+    }
+    return stripped;
   }
   if (pathname !== "/" && pathname.endsWith("/")) {
     return pathname.slice(0, -1);
