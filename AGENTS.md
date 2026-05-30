@@ -10,7 +10,7 @@ This project is indexed by GitNexus as **llm-math-tutor** (240 symbols, 314 rela
 **API keys never travel from client to server side.** They are never exposed in browser network requests and cannot be sniffed via DevTools.
 
 - **Node.js (current)**: Express server at `backend/server.ts` reads `GEMINI_API_KEY` from root `.env` via `process.env`. Frontend calls `/api/*` endpoints — keys stay server-side.
-- **PHP (alternative)**: `backend/api-proxy.php` reads `GEMINI_API_KEY` from `backend/.env` via `parse_ini_file()`. Frontend calls `/backend/api-proxy.php?action=...` — absolute path from server root, parallel to `/webapps/`. Keys stay server-side.
+- **PHP (alternative)**: `backend/api-proxy.php` reads `GEMINI_API_KEY` from `backend/.env` via custom `loadEnv()` (resilient `.env` parser with parse_ini_file fallback). Frontend calls `/backend/api-proxy.php?action=...` — absolute path from server root, parallel to `/webapps/`. Includes `?debug=1` diagnostic endpoint. Keys stay server-side.
 - Both proxies intermediate all Gemini API connections; the browser never holds or transmits the key.
 - `.env` files are gitignored (`.env*` pattern). Only `.env.example` templates are committed.
 

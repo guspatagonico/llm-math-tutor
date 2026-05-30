@@ -161,6 +161,9 @@ location ~ /backend/api-proxy\.php$ {
   - Sin llamadas que expongan `GEMINI_API_KEY`
 - [ ] **7.7** Verificar que `/backend/.env` no es accesible vía web:
   - `https://tudominio.com/backend/.env` → 403 o 404
+- [ ] **7.8** Diagnóstico del proxy PHP:
+  - Visitar `https://tudominio.com/backend/api-proxy.php?debug=1`
+  - Confirma que `exists: true`, `readable: true`, `has_api_key: true`
 
 ---
 
@@ -169,6 +172,7 @@ location ~ /backend/api-proxy\.php$ {
 | Problema                                     | Causa probable                        | Solución                                     |
 | -------------------------------------------- | ------------------------------------- | -------------------------------------------- |
 | API devuelve "GEMINI_API_KEY no configurada" | `/backend/.env` no existe o está vacío | Crear/editar con la key real                 |
+| API devuelve "GEMINI_API_KEY no configurada" | `.env` no es leíble por parse_ini_file | Visitar `?debug=1` para diagnosticar ruta y permisos |
 | Error de CORS en llamadas API                | Apache/nginx no configurado           | Verificar `.htaccess` o config de nginx      |
 | Ruta `/sigmoide-logit` da 404                | SPA fallback no configurado           | Revisar `.htaccess` — debe servir index.html |
 | JS/CSS dan 404 (rutas sin subcarpeta)        | `VITE_BASE_PATH` no estaba seteado    | Re-build con `VITE_BASE_PATH` correcto       |
