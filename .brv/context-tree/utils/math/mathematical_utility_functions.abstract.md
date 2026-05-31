@@ -1,1 +1,1 @@
-This
+This module provides mathematical utility functions like softmax, logit, and sigmoid, plus an experimental inverse softmax whose solution is non-unique.

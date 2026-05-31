@@ -37,6 +37,20 @@
       "type": "summary"
     },
     {
+      "importance": 50,
+      "path": "api_routes/proxy/context.md",
+      "tokens": 61,
+      "type": "context"
+    },
+    {
+      "abstractPath": "api_routes/proxy/php_proxy_endpoints.abstract.md",
+      "abstractTokens": 0,
+      "importance": 50,
+      "path": "api_routes/proxy/php_proxy_endpoints.md",
+      "tokens": 0,
+      "type": "context"
+    },
+    {
       "abstractPath": "api_routes/token_prediction/token_prediction_endpoint.abstract.md",
       "abstractTokens": 1,
       "importance": 50,
@@ -60,6 +74,20 @@
     },
     {
       "importance": 50,
+      "path": "architecture/backend/context.md",
+      "tokens": 68,
+      "type": "context"
+    },
+    {
+      "abstractPath": "architecture/backend/php_api_proxy.abstract.md",
+      "abstractTokens": 0,
+      "importance": 50,
+      "path": "architecture/backend/php_api_proxy.md",
+      "tokens": 0,
+      "type": "context"
+    },
+    {
+      "importance": 50,
       "path": "architecture/centralized-gemini-api-client-with-graceful-degradation.md",
       "tokens": 435,
       "type": "context"
@@ -74,6 +102,60 @@
       "importance": 50,
       "path": "architecture/type-safe-client-server-api-layer.md",
       "tokens": 397,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "frontend/constants/context.md",
+      "tokens": 41,
+      "type": "context"
+    },
+    {
+      "abstractPath": "frontend/constants/frontend_constants.abstract.md",
+      "abstractTokens": 0,
+      "importance": 50,
+      "path": "frontend/constants/frontend_constants.md",
+      "tokens": 0,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "frontend/constants/frontend_constants_overview.md",
+      "tokens": 264,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "frontend/context.md",
+      "tokens": 90,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "frontend/types/context.md",
+      "tokens": 33,
+      "type": "context"
+    },
+    {
+      "abstractPath": "frontend/types/frontend_types.abstract.md",
+      "abstractTokens": 0,
+      "importance": 50,
+      "path": "frontend/types/frontend_types.md",
+      "tokens": 0,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "frontend/utils/context.md",
+      "tokens": 30,
+      "type": "context"
+    },
+    {
+      "abstractPath": "frontend/utils/frontend_utilities.abstract.md",
+      "abstractTokens": 0,
+      "importance": 50,
+      "path": "frontend/utils/frontend_utilities.md",
+      "tokens": 0,
       "type": "context"
     },
     {
@@ -177,12 +259,6 @@
       "type": "context"
     },
     {
-      "importance": 50,
-      "path": "services/gemini/gemini_ai_client.md",
-      "tokens": 658,
-      "type": "context"
-    },
-    {
       "abstractPath": "types/api/api_data_structures.abstract.md",
       "abstractTokens": 1,
       "importance": 50,
@@ -197,21 +273,33 @@
       "type": "context"
     },
     {
+      "importance": 50,
+      "path": "utils/context.md",
+      "tokens": 52,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "utils/math/context.md",
+      "tokens": 43,
+      "type": "context"
+    },
+    {
       "abstractPath": "utils/math/mathematical_utility_functions.abstract.md",
-      "abstractTokens": 1,
+      "abstractTokens": 38,
       "importance": 50,
       "path": "utils/math/mathematical_utility_functions.md",
-      "tokens": 1,
+      "tokens": 38,
       "type": "context"
     }
   ],
-  "generated_at": "2026-05-29T12:51:38.078Z",
+  "generated_at": "2026-05-31T00:14:44.925Z",
   "lane_tokens": {
-    "contexts": 3847,
+    "contexts": 3908,
     "stubs": 0,
     "summaries": 1974
   },
-  "source_fingerprint": "662188b1af9b1ab0e13be1be02dc14b1f8f1038eba3f44e2dd607915c527bce5",
-  "total_tokens": 5821,
+  "source_fingerprint": "ce816f317d7504634afe220f2f5e3571c8951f2fcac524dc8467e3a7d8c584fc",
+  "total_tokens": 5882,
   "version": 1
 }

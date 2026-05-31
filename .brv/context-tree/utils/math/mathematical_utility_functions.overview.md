@@ -1,23 +1,19 @@
-### Key Points
-- The document outlines mathematical utility functions for machine learning tasks, located in `src/utils/math.ts`.
-- Key functions implemented include `sigmoid`, `softmax`, `softmaxJacobian`, `logit`, and `normalizeSteps`.
-- These functions perform common ML transformations such as activation, calculating probability distributions, and scaling numerical inputs (logits, probabilities).
-- The `softmax` function includes temperature scaling, a crucial feature for controlling the randomness of model predictions.
-- A specific function, `normalizeSteps`, is provided to offer a detailed, step-by-step breakdown of the softmax calculation for clarity.
+- **Key Points:**
+    - This document describes a collection of mathematical utility functions located in `src/utils/math.ts`.
+    - The primary functions covered are `softmax`, `logit`, `sigmoid`, and an experimental `inverseSoftmax`.
+    - The `softmax` function's purpose is to convert an array of numbers into a probability distribution.
+    - The `logit` and `sigmoid` functions are presented as inverses of each other, used for converting between probabilities and log-odds.
+    - A critical point highlighted is that the `inverseSoftmax` function is experimental because reversing the softmax transformation is an "ill-posed problem" with no unique solution.
+    - The utility functions are self-contained, depending only on the standard `Math` object.
 
-### Structure / Sections Summary
-- **Reason:** States the document's purpose is to provide documentation for the math utility functions found in `src/utils/math.ts`.
-- **Raw Concept:** Briefly defines the task as implementing mathematical utilities, identifies the source file, and describes the general flow of the functions.
-- **Narrative:**
-    - **Structure:** Describes the implementation as a collection of pure functions for common ML math operations.
-    - **Highlights:** Emphasizes the inclusion of temperature scaling within the `softmax` function.
+- **Structure Summary:**
+    - **Reason:** States the document's goal is to provide documentation for the math utilities.
+    - **Raw Concept:** Identifies the source file (`src/utils/math.ts`) and the documentation task.
+    - **Narrative:** Describes the file's structure, dependencies (none external), and provides a summary of the key functions.
+    - **Facts:** Lists concise, important truths about the functions, such as the relationship between logit and sigmoid and the non-uniqueness issue with inverse softmax.
 
-### Notable Entities, Patterns, or Decisions
-- **Entities:**
-    - **File:** `src/utils/math.ts`
-    - **Functions:** `sigmoid`, `softmax`, `softmaxJacobian`, `logit`, `normalizeSteps`
-- **Patterns:**
-    - **Pure Functions:** The utilities are designed as a collection of pure functions, meaning their output is determined only by their input without side effects.
-- **Decisions:**
-    - **Temperature Scaling:** The decision to incorporate temperature scaling into the `softmax` function is highlighted as a key choice for controlling prediction confidence and randomness.
-    - **Explanatory Breakdown:** The creation of `normalizeSteps` reflects a decision to provide a more transparent and understandable view of the softmax calculation process.
+- **Notable Entities, Patterns, or Decisions:**
+    - **Entities:** The functions `softmax`, `logit`, `sigmoid`, and `inverseSoftmax`.
+    - **Source File:** `src/utils/math.ts`.
+    - **Key Decision:** The choice to implement an `inverseSoftmax` function is explicitly labeled as "experimental".
+    - **Noted Problem:** The documentation clearly states that reversing the softmax function is an ill-posed problem because any constant can be added to the input logits without changing the resulting probability distribution, making a unique inverse impossible.

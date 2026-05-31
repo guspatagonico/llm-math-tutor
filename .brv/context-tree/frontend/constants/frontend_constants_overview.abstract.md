@@ -1,0 +1,1 @@
+Frontend constants are organized by feature into separate files to centralize settings for charts, learning paths, routes, SEO, and temperature.

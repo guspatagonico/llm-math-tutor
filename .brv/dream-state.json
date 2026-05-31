@@ -1,9 +1,70 @@
 {
-  "curationsSinceDream": 0,
+  "curationsSinceDream": 6,
   "lastDreamAt": "2026-05-29T12:51:38.081Z",
   "lastDreamLogId": "drm-1780058815525",
   "pendingMerges": [],
-  "staleSummaryPaths": [],
+  "staleSummaryPaths": [
+    {
+      "enqueuedAt": 1780186296507,
+      "path": "utils/context.md"
+    },
+    {
+      "enqueuedAt": 1780186296507,
+      "path": "utils/math/context.md"
+    },
+    {
+      "enqueuedAt": 1780186296507,
+      "path": "utils/math/mathematical_utility_functions.md"
+    },
+    {
+      "enqueuedAt": 1780186324681,
+      "path": "frontend/context.md"
+    },
+    {
+      "enqueuedAt": 1780186324681,
+      "path": "frontend/constants/context.md"
+    },
+    {
+      "enqueuedAt": 1780186324681,
+      "path": "frontend/constants/frontend_constants.md"
+    },
+    {
+      "enqueuedAt": 1780186324681,
+      "path": "frontend/types/context.md"
+    },
+    {
+      "enqueuedAt": 1780186324681,
+      "path": "frontend/types/frontend_types.md"
+    },
+    {
+      "enqueuedAt": 1780186324681,
+      "path": "frontend/utils/context.md"
+    },
+    {
+      "enqueuedAt": 1780186324681,
+      "path": "frontend/utils/frontend_utilities.md"
+    },
+    {
+      "enqueuedAt": 1780186419584,
+      "path": "api_routes/proxy/context.md"
+    },
+    {
+      "enqueuedAt": 1780186419584,
+      "path": "api_routes/proxy/php_proxy_endpoints.md"
+    },
+    {
+      "enqueuedAt": 1780186419584,
+      "path": "architecture/backend/context.md"
+    },
+    {
+      "enqueuedAt": 1780186419584,
+      "path": "architecture/backend/php_api_proxy.md"
+    },
+    {
+      "enqueuedAt": 1780186484908,
+      "path": "frontend/constants/frontend_constants_overview.md"
+    }
+  ],
   "totalDreams": 1,
   "version": 1
 }

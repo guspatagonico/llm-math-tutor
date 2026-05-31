@@ -8,7 +8,17 @@ summary_level: d2
 token_count: 443
 type: summary
 ---
-An architectural analysis detailed in **architectural_analysis_and_refactoring_plan.md** identified significant DRY, SOLID, and KISS violations in the project's initial monolithic structure. This prompted a major refactoring effort to establish a modular architecture with a clear separation of concerns, resulting in key patterns for API communication and external service integration.
+An architectural analysis detailed in **architectural_analysis_and_refactoring_plan.md** identified significant DRY, SOLID, and KISS violations in the project's initial monolithic structure. This prompted a major refactoring effort to establish a modular architecture with a clear separation of concerns.
+
+### Dual Backend Architecture
+
+The project supports **two independent backends** for the same API contract, documented in **architecture/backend/**:
+
+*   **Express Dev Server** (`backend/server.ts`): Express on port 3000 with Vite middleware (HMR, fast refresh) in development. Uses GoogleGenAI SDK with gemini-3.5-flash model.
+*   **PHP Proxy** (`backend/api-proxy.php`): Self-contained, zero-dependency PHP script for production. Uses cURL to call Gemini API directly with gemini-2.5-flash (configurable).
+*   **Automatic Selection** (`src/services/api.ts`): Frontend selects backend at runtime via `import.meta.env.DEV` — Express for dev, PHP for production.
+*   **Security**: `GEMINI_API_KEY` is read server-side in both implementations and never exposed to the browser.
+*   **Graceful Degradation**: Both backends return predefined educational fallback data (`FALLBACK_CANDIDATES`, `FALLBACK_TUTOR_REPLY`) when the API key is missing or API calls fail.
 
 ### Key Architectural Patterns
 
