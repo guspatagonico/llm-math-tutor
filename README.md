@@ -15,16 +15,31 @@ Esta iniciativa nace con un propósito puramente **educativo y de divulgación c
 
 ---
 
-## Stack
+## Stack tecnológico
 
-| Capa | Tecnología |
-|------|-----------|
-| Frontend | React 19 + TypeScript + Vite |
-| Estilos | Tailwind CSS |
-| Renderizado LaTeX | KaTeX |
+Esta base usa una SPA de React moderna con backend liviano para orquestar llamadas a Gemini. Para que cualquier colega pueda contribuir rápido, este es el stack real que hoy está en producción/desarrollo:
+
+| Capa | Tecnologías y bibliotecas |
+|------|----------------------------|
+| Frontend | React 19 + TypeScript + Vite 6 |
+| Estado global | Zustand (`zustand`) con stores por dominio |
+| Persistencia en navegador | `localStorage` vía middleware `persist` de Zustand (persistencia selectiva) |
+| Estilos | Tailwind CSS v4 |
+| Visualización de datos | Recharts |
+| Renderizado Markdown | `react-markdown` |
+| Renderizado matemático | `remark-math` + `rehype-katex` + KaTeX |
+| Iconografía | `lucide-react` |
+| Animaciones | `motion` |
 | API en dev | Express (Node.js) en `backend/server.ts` |
-| API en prod | PHP proxy autosuficiente (`backend/api-proxy.php`) |
-| LLM | Google Gemini (gemini-2.5-flash) |
+| API en prod | Proxy PHP autosuficiente (`backend/api-proxy.php`) |
+| LLM | Google Gemini (`@google/genai`, modelo configurable; default `gemini-2.5-flash`) |
+
+### Estado y persistencia (Zustand + localStorage)
+
+- El proyecto centraliza estado de módulos en `src/stores/` (chat, temperatura, softmax y sigmoide/logit).
+- Se aplica **persistencia selectiva**: solo se guardan los campos útiles para retomar trabajo; estados efímeros (loading, warnings, candidatos transitorios) no se persisten.
+- Las claves de `localStorage` están namespaced con prefijo `llm-math-tutor-` para evitar colisiones con otras apps/sitios.
+- En desarrollo, se exponen stores en `window.__stores` para depuración rápida desde consola del navegador.
 
 ---
 
@@ -57,12 +72,13 @@ src/
 │   ├── shared/        # MathMarkdownRenderer, SeoHead, Pagination
 │   └── ui/            # Button, Card, Input, Tooltip, Badge, etc.
 ├── constants/         # Rutas, charts, learning-path
-├── hooks/             # useExplainer, useRouteSeo, useStreamingTutor
+├── hooks/             # Hooks transversales (ej. SEO de ruta)
+├── stores/            # Zustand stores con persistencia selectiva (localStorage)
 ├── services/          # api.ts — capa fetch unificada (dev → Express, prod → PHP)
 ├── types/             # Tipos globales
 ├── utils/             # Funciones utilitarias
 ├── App.tsx            # Router SPA con lazy-loading
-└── index.tsx          # Entry point
+└── main.tsx           # Entry point
 backend/
 ├── server.ts          # Express dev server
 ├── routes/            # predict.ts, tutor.ts
