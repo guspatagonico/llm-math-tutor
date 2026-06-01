@@ -14,11 +14,16 @@ export function useTutorChat() {
   const [inputText, setInputText] = useState("");
   const [isSending, setIsSending] = useState(false);
   const [warningMsg, setWarningMsg] = useState("");
+  const [hasUserSentMessage, setHasUserSentMessage] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    if (!hasUserSentMessage) {
+      return;
+    }
+
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [messages, hasUserSentMessage]);
 
   const handleSendMessage = useCallback(
     async (e: React.FormEvent) => {
@@ -27,6 +32,7 @@ export function useTutorChat() {
 
       const userMsg = createMessage("user", inputText.trim());
       setMessages((prev) => [...prev, userMsg]);
+      setHasUserSentMessage(true);
       setInputText("");
       setIsSending(true);
       setWarningMsg("");
@@ -53,6 +59,7 @@ export function useTutorChat() {
 
   const clearChat = useCallback(() => {
     setMessages([getWelcomeMessage()]);
+    setHasUserSentMessage(false);
   }, []);
 
   return {

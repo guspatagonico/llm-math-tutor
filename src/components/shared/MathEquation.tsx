@@ -15,6 +15,20 @@
 
 import React, { useState } from "react";
 
+function renderTerm(text: string): React.ReactNode {
+  if (!text.includes("^")) return text;
+  const parts = text.split("^");
+  const result: React.ReactNode[] = [parts[0]];
+  for (let i = 1; i < parts.length; i++) {
+    const match = parts[i].match(/^([^\s()]*)/);
+    const sup = match ? match[1] : "";
+    const rest = parts[i].slice(sup.length);
+    result.push(<sup key={i}>{sup}</sup>);
+    if (rest) result.push(rest);
+  }
+  return <>{result}</>;
+}
+
 interface MathEquationProps {
   title?: string;
   latex?: string; // Descriptive fallback text
@@ -62,7 +76,7 @@ export default function MathEquation({ title, htmlLayout, termExplanations }: Ma
             >
               <div className="flex items-center gap-2 mb-1">
                 <span className={`inline-block px-1.5 py-0.5 text-xs font-mono font-bold rounded ${item.colorClass} bg-opacity-20`}>
-                  {item.term}
+                  {renderTerm(item.term)}
                 </span>
               </div>
               <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-sans">

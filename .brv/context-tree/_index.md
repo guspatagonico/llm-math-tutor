@@ -1,43 +1,36 @@
 ---
-children_hash: 86e254895a3cfb1556d2bacaa676fa606f2abdeb5484720a49362444ad5fa9ae
-compression_ratio: 0.27697974217311233
+children_hash: 040846d7b1c457b5ae59d647adf85657f168928f3017629d4231a136073ba40a
+compression_ratio: 0.19976324356318437
 condensation_order: 3
-covers: [api_routes/_index.md, architecture/_index.md, hooks/_index.md, project/_index.md, services/_index.md, types/_index.md, ui_components/_index.md, utils/_index.md]
-covers_token_total: 2715
+covers: [api_routes/_index.md, architecture/_index.md, frontend/_index.md, hooks/_index.md, project/_index.md, services/_index.md, types/_index.md, ui_components/_index.md, utils/_index.md]
+covers_token_total: 3379
 summary_level: d3
-token_count: 752
+token_count: 675
 type: summary
 ---
-## LLM Math Tutor Project Summary
+# LLM Math Tutor Project Summary
 
-This document provides a structural overview of the LLM Math Tutor project, a Single Page Application built with React, TypeScript, and Vite, featuring an Express backend and integration with the Gemini API. The project's architecture, detailed in **`architecture/_index.md`**, underwent a significant refactoring to enforce a modular design with a clear separation of concerns.
+This document provides a structural overview of the LLM Math Tutor project, a Single Page Application built with React, TypeScript, and Vite, featuring an Express backend. The project's architecture, detailed in the **architecture** domain, was refactored from a monolith to a modular system to improve maintainability, establishing clear domains for services, hooks, components, and types as outlined in `architectural_analysis_and_refactoring_plan.md`.
 
-### Core Architecture
+### Core Architecture & Backend
 
-Key architectural decisions focus on creating a robust and maintainable system:
+The application utilizes a **dual backend architecture** to support different environments: a Node.js/Express server for development and a dependency-free PHP proxy for production. Key architectural patterns include a centralized singleton client for the Gemini AI service (`gemini_ai_client.md`) with graceful degradation (returning hardcoded data if the API key is missing) and a strictly type-safe API layer documented in `type-safe-client-server-api-layer.md`.
 
-*   **Type-Safe API Layer**: As documented in **`architecture/type-safe-client-server-api-layer.md`**, a strict contract exists between the client and server. This is achieved through shared data structures in **`types/api`**, server-side endpoints in **`api_routes`**, and a strongly-typed client-side wrapper in **`services/api`**.
-*   **Centralized Gemini Client**: All interactions with the Google Gemini API are managed by a singleton client defined in `services/gemini.ts`. The API routes, described in **`api_routes/_index.md`**, implement graceful degradation with hardcoded fallbacks to ensure application stability if the Gemini API key is missing.
-
-### Backend API
-
-The backend, documented in **`api_routes/_index.md`**, exposes two primary endpoints:
-
-*   **Token Prediction (`/api/predict-tokens`)**: Simulates an LLM's prediction head using the Gemini API.
-*   **Tutor Chat (`/api/tutor-chat`)**: Manages the core AI tutor chat functionality, using a detailed system prompt to define the tutor's persona.
+The **api_routes** domain covers the two primary endpoints:
+*   `/api/tutor-chat`: Manages the conversational AI logic, detailed in `ai_tutor_chat_endpoint.md`.
+*   `/api/predict-tokens`: Simulates an LLM's prediction head, as described in `token_prediction_endpoint.md`.
 
 ### Frontend Structure
 
-The frontend is organized into services, hooks, UI components, and utilities.
+The **frontend** is organized into distinct domains for logic and configuration:
 
-*   **Services (`services/_index.md`)**: Client-side services encapsulate external communication. The **API Client** (`services/api`) provides type-safe functions for backend calls, while the **Gemini AI Client** (`services/gemini`) manages interactions with the Google Gemini API.
-
-*   **React Hooks (`hooks/_index.md`)**: Custom hooks manage stateful logic. Key hooks include:
-    *   `useTutorChat`: Manages the AI tutor chat state and API interactions.
-    *   `useTemperature`: Handles logic for the temperature-based token sampling simulation.
-    *   `useSoftmax`: Calculates softmax probabilities from logits and temperature.
-    *   `useRouteSeo`: Manages dynamic page titles and meta descriptions.
-
-*   **UI Components (`ui_components/_index.md`)**: The application's UI is built from a collection of modular React components found in `src/components`. This includes core layout components, math renderers (`MathEquation.tsx`), and interactive educational modules like the **`SigmoidLogitModule`** and **`TemperatureSimulator`**, which provide visualizations of machine learning concepts.
-
-*   **Utilities (`utils/_index.md`)**: Reusable helper functions are centralized in the `utils` domain. The **`utils/math`** module provides pure mathematical functions for machine learning operations like `sigmoid`, `logit`, and `softmax` with temperature scaling.
+*   **UI Components (`ui_components`)**: Contains 12 modular React components for the core interface (`component_collection.md`), including interactive visualizations like `SigmoidLogitModule.tsx` and `TemperatureSimulator.tsx`.
+*   **Hooks (`hooks`)**: Encapsulates stateful logic. Key hooks include:
+    *   `useTutorChat`: Manages the AI chat state (`usetutorchat_hook.md`).
+    *   `useTemperature`: Handles the token sampling simulation (`usetemperature_hook.md`).
+    *   `useSoftmax`: Calculates softmax probabilities (`usesoftmax_hook.md`).
+    *   `useRouteSeo`: Manages dynamic SEO metadata (`userouteseo_hook.md`).
+*   **Services (`services`)**: Provides client-side wrappers for external interactions. This includes a type-safe client for the application backend (`api_client_service.md`) and the singleton for the Gemini API.
+*   **Types (`types`)**: Centralizes core data structures for API communication in `src/types/api.ts`, as detailed in `api_data_structures.md`.
+*   **Constants (`frontend/constants`)**: Manages application configurations for routes, SEO, and AI model settings, organized by feature in `src/constants`.
+*   **Utils (`utils`)**: Contains standalone mathematical utility functions like `softmax`, `sigmoid`, and `logit` from `src/utils/math.ts`, documented in `mathematical_utility_functions.md`.

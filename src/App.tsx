@@ -1,7 +1,6 @@
 import React, { useState, useEffect, lazy, Suspense } from "react";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
-import PathwayBanner from "./components/shared/PathwayBanner";
 import SeoBlocks from "./components/shared/SeoBlocks";
 import { TABS, DEFAULT_TAB, fullPath, stripBase } from "./constants/routes";
 import { useRouteSeo, getRouteKey } from "./hooks/useRouteSeo";
@@ -64,18 +63,16 @@ export default function App() {
     if (targetPath !== window.location.pathname) {
       window.history.pushState(null, "", targetPath);
       setActiveTab(tabId);
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     }
   };
 
   const ActiveComponent = TAB_COMPONENTS[activeTab] || SigmoidLogitModule;
   const activeRouteKey = routeKeyByTab[activeTab] || getRouteKey(window.location.pathname);
-  const isHome = activeTab === "home";
-
   return (
     <div className="min-h-screen transition-colors duration-300 bg-slate-950 text-slate-300 selection:bg-indigo-100 font-sans pb-16 dark">
       <Header activeTab={activeTab} onNavigate={navigateTo} />
       <main className="max-w-6xl mx-auto px-4 mt-8">
-        {!isHome ? <PathwayBanner /> : null}
         <div className="transition-opacity duration-300">
           <Suspense fallback={<div className="flex justify-center py-20"><Spinner size="md" /></div>}>
             <ActiveComponent />

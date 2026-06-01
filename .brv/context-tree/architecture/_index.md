@@ -1,37 +1,28 @@
 ---
-children_hash: 01ccf847448c75a1a534f88b862959a83ef513f724e94aa3ec5d3f5f54f4103d
-compression_ratio: 0.35130848532910386
+children_hash: 15e8c85d76a23d6d039d15610236e476a4fccfb0378ae981836f4be9e6dca742
+compression_ratio: 0.28927410617551463
 condensation_order: 2
-covers: [centralized-gemini-api-client-with-graceful-degradation.md, llm_math_tutor/_index.md, type-safe-client-server-api-layer.md]
-covers_token_total: 1261
+covers: [backend/_index.md, centralized-gemini-api-client-with-graceful-degradation.md, llm_math_tutor/_index.md, type-safe-client-server-api-layer.md]
+covers_token_total: 1846
 summary_level: d2
-token_count: 443
+token_count: 534
 type: summary
 ---
-An architectural analysis detailed in **architectural_analysis_and_refactoring_plan.md** identified significant DRY, SOLID, and KISS violations in the project's initial monolithic structure. This prompted a major refactoring effort to establish a modular architecture with a clear separation of concerns.
+# Architecture Overview
 
-### Dual Backend Architecture
+The project's architecture evolved from a monolithic 9-file structure to a modular, ~30-file system to resolve critical DRY, SOLID, and KISS principle violations. This refactoring, detailed in **architectural_analysis_and_refactoring_plan.md**, established a clear separation of concerns with dedicated domains for services, hooks, components, and types.
 
-The project supports **two independent backends** for the same API contract, documented in **architecture/backend/**:
+### Dual Backend System
+The application employs a **dual backend architecture** to serve different environments, with the frontend selecting the appropriate backend at runtime via `src/services/api.ts`. Both backends are functionally equivalent, implementing the same API contract for `predict-tokens` and `tutor-chat` endpoints.
+-   **Development Server**: A Node.js/Express server (`backend/server.ts`) integrated with Vite for HMR, as described in `express_server.md`.
+-   **Production Proxy**: A dependency-free PHP script (`backend/api-proxy.php`) that acts as a secure proxy using cURL, detailed in `php_api_proxy.md`.
 
-*   **Express Dev Server** (`backend/server.ts`): Express on port 3000 with Vite middleware (HMR, fast refresh) in development. Uses GoogleGenAI SDK with gemini-3.5-flash model.
-*   **PHP Proxy** (`backend/api-proxy.php`): Self-contained, zero-dependency PHP script for production. Uses cURL to call Gemini API directly with gemini-2.5-flash (configurable).
-*   **Automatic Selection** (`src/services/api.ts`): Frontend selects backend at runtime via `import.meta.env.DEV` — Express for dev, PHP for production.
-*   **Security**: `GEMINI_API_KEY` is read server-side in both implementations and never exposed to the browser.
-*   **Graceful Degradation**: Both backends return predefined educational fallback data (`FALLBACK_CANDIDATES`, `FALLBACK_TUTOR_REPLY`) when the API key is missing or API calls fail.
+### Core Architectural Patterns
+Two key patterns govern service interaction and client-server communication:
 
-### Key Architectural Patterns
+1.  **Centralized API Client with Graceful Degradation**: As outlined in **centralized-gemini-api-client-with-graceful-degradation.md**, all interactions with the Gemini AI service are managed by a single, centralized singleton client in the `services` domain. To handle dependency failures, API routes implement a graceful degradation pattern, returning hardcoded fallback data if the `GEMINI_API_KEY` is missing, ensuring a stable user experience.
 
-*   **Type-Safe Client-Server API Layer**: A strict, type-safe boundary is enforced between the client and server. This pattern, detailed in **type-safe-client-server-api-layer.md**, uses three core components:
-    *   `types/api`: Centralizes shared data structures (e.g., `Candidate`, `Message`) that act as the data contract.
-    *   `api_routes`: Defines the server-side endpoints.
-    *   `services/api`: Provides a strongly-typed client-side wrapper (`src/services/api.ts`) for all frontend-backend communication.
-
-*   **Centralized Gemini API Client with Graceful Degradation**: As documented in **centralized-gemini-api-client-with-graceful-degradation.md**, all interactions with the Google Gemini AI are managed by a single, centralized singleton client in `services/gemini.ts`. To handle dependency failures, API routes like `handlePredictTokens` and `handleTutorChat` implement graceful degradation, providing hardcoded fallback responses if the `GEMINI_API_KEY` is missing, ensuring application stability.
-
-### Refactoring Priorities
-
-The refactoring plan outlined several high-priority actions, including:
-*   Replacing a custom markdown parser with `react-markdown`.
-*   Decomposing complex UI into single-responsibility hooks (`useSoftmax`, `useTutorChat`).
-*   Extracting constants to dedicated files (e.g., `constants/temperature.ts`).
+2.  **Type-Safe API Layer**: The application enforces a strict, type-safe boundary between the client and server, as documented in **type-safe-client-server-api-layer.md**. This is achieved through three components:
+    -   **`api_routes`**: Defines the server-side endpoints.
+    -   **`types/api`**: Provides shared, centralized data structures (e.g., `Candidate`, `Message`) that form the API contract.
+    -   **`services/api`**: A typed client-side wrapper (`src/services/api.ts`) that provides strongly-typed functions for the frontend to consume the backend API.

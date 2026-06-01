@@ -33,8 +33,9 @@ body.dark {
   color: #94a3b8; /* Slate-400 */
 }
 
-.tab-nav-scroll {
-  scrollbar-width: none;
+body.dark {
+  background-color: #020617;
+  color: #94a3b8;
 }
 .tab-nav-scroll::-webkit-scrollbar {
   display: none;

@@ -2,12 +2,10 @@
 title: Mathematical Utility Functions
 summary: A collection of mathematical utility functions for calculations like softmax, logit, and sigmoid, along with an experimental inverse softmax.
 tags: []
-related: [utils/math/context.md]
+related: []
 keywords: []
 createdAt: '2026-05-29T12:24:43.158Z'
 updatedAt: '2026-05-31T00:11:36.486Z'
-consolidated_at: '2026-05-31T00:33:06.523Z'
-consolidated_from: [{date: '2026-05-31T00:33:06.523Z', path: utils/math/mathematical_utility_functions.abstract.md, reason: 'The abstract and overview files are redundant summaries derived entirely from the main content file, `mathematical_utility_functions.md`. The main file contains all the detailed information, making the others superfluous.'}, {date: '2026-05-31T00:33:06.523Z', path: utils/math/mathematical_utility_functions.overview.md, reason: 'The abstract and overview files are redundant summaries derived entirely from the main content file, `mathematical_utility_functions.md`. The main file contains all the detailed information, making the others superfluous.'}]
 ---
 ## Reason
 Documenting the mathematical utility functions from src/utils/math.ts

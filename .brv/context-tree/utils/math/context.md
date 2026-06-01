@@ -1,3 +1,6 @@
+---
+related: [utils/math/mathematical_utility_functions.md]
+---
 # Topic: math
 
 ## Overview

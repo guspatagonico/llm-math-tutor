@@ -5,6 +5,7 @@ import ChatMessage from "../ui/ChatMessage";
 import LoadingDots from "../ui/LoadingDots";
 import WarningBanner from "../ui/WarningBanner";
 import Spinner from "../ui/Spinner";
+import IconBox from "../ui/IconBox";
 
 export default function AITutorChat() {
   const {
@@ -24,9 +25,7 @@ export default function AITutorChat() {
 
       <div className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 p-4 flex justify-between items-center shrink-0">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-indigo-600 dark:bg-indigo-700 text-white flex items-center justify-center shadow">
-            <Sparkles className="w-4 h-4" />
-          </div>
+          <IconBox icon={Sparkles} color="indigo" variant="solid" size="md" rounded="lg" className="dark:bg-indigo-700 shadow" />
           <div>
             <h2 className="text-sm font-semibold text-slate-800 dark:text-slate-100">IA Tutor de Probabilidades</h2>
             <span className="text-xs text-slate-700 dark:text-slate-400 font-medium">Resolución de dudas en tiempo real</span>

@@ -3,31 +3,25 @@
     {
       "order": 3,
       "path": "_index.md",
-      "tokens": 752,
+      "tokens": 675,
       "type": "summary"
     },
     {
       "order": 2,
       "path": "api_routes/_index.md",
-      "tokens": 269,
+      "tokens": 355,
       "type": "summary"
     },
     {
       "order": 2,
       "path": "architecture/_index.md",
-      "tokens": 443,
+      "tokens": 534,
       "type": "summary"
     },
     {
       "order": 2,
-      "path": "hooks/_index.md",
-      "tokens": 377,
-      "type": "summary"
-    },
-    {
-      "order": 2,
-      "path": "types/_index.md",
-      "tokens": 96,
+      "path": "frontend/_index.md",
+      "tokens": 348,
       "type": "summary"
     },
     {
@@ -38,16 +32,8 @@
     },
     {
       "importance": 50,
-      "path": "api_routes/proxy/context.md",
-      "tokens": 61,
-      "type": "context"
-    },
-    {
-      "abstractPath": "api_routes/proxy/php_proxy_endpoints.abstract.md",
-      "abstractTokens": 0,
-      "importance": 50,
       "path": "api_routes/proxy/php_proxy_endpoints.md",
-      "tokens": 0,
+      "tokens": 891,
       "type": "context"
     },
     {
@@ -75,7 +61,19 @@
     {
       "importance": 50,
       "path": "architecture/backend/context.md",
-      "tokens": 68,
+      "tokens": 163,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "architecture/backend/dual_backend_architecture.md",
+      "tokens": 881,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "architecture/backend/express_server.md",
+      "tokens": 807,
       "type": "context"
     },
     {
@@ -94,34 +92,8 @@
     },
     {
       "importance": 50,
-      "path": "architecture/llm_math_tutor/architectural_analysis_and_refactoring_plan.md",
-      "tokens": 954,
-      "type": "context"
-    },
-    {
-      "importance": 50,
       "path": "architecture/type-safe-client-server-api-layer.md",
       "tokens": 397,
-      "type": "context"
-    },
-    {
-      "importance": 50,
-      "path": "frontend/constants/context.md",
-      "tokens": 41,
-      "type": "context"
-    },
-    {
-      "abstractPath": "frontend/constants/frontend_constants.abstract.md",
-      "abstractTokens": 0,
-      "importance": 50,
-      "path": "frontend/constants/frontend_constants.md",
-      "tokens": 0,
-      "type": "context"
-    },
-    {
-      "importance": 50,
-      "path": "frontend/constants/frontend_constants_overview.md",
-      "tokens": 264,
       "type": "context"
     },
     {
@@ -215,47 +187,11 @@
       "type": "context"
     },
     {
-      "importance": 50,
-      "path": "hooks/use_temperature/context.md",
-      "tokens": 50,
-      "type": "context"
-    },
-    {
       "abstractPath": "hooks/use_temperature/usetemperature_hook.abstract.md",
       "abstractTokens": 0,
       "importance": 50,
       "path": "hooks/use_temperature/usetemperature_hook.md",
       "tokens": 0,
-      "type": "context"
-    },
-    {
-      "importance": 50,
-      "path": "project/context.md",
-      "tokens": 87,
-      "type": "context"
-    },
-    {
-      "importance": 50,
-      "path": "project/overview/context.md",
-      "tokens": 69,
-      "type": "context"
-    },
-    {
-      "importance": 50,
-      "path": "project/overview/llm_math_tutor.md",
-      "tokens": 550,
-      "type": "context"
-    },
-    {
-      "importance": 50,
-      "path": "services/api/api_client_service.md",
-      "tokens": 271,
-      "type": "context"
-    },
-    {
-      "importance": 50,
-      "path": "services/gemini/context.md",
-      "tokens": 53,
       "type": "context"
     },
     {
@@ -265,41 +201,15 @@
       "path": "types/api/api_data_structures.md",
       "tokens": 1,
       "type": "context"
-    },
-    {
-      "importance": 50,
-      "path": "ui_components/context.md",
-      "tokens": 68,
-      "type": "context"
-    },
-    {
-      "importance": 50,
-      "path": "utils/context.md",
-      "tokens": 52,
-      "type": "context"
-    },
-    {
-      "importance": 50,
-      "path": "utils/math/context.md",
-      "tokens": 43,
-      "type": "context"
-    },
-    {
-      "abstractPath": "utils/math/mathematical_utility_functions.abstract.md",
-      "abstractTokens": 38,
-      "importance": 50,
-      "path": "utils/math/mathematical_utility_functions.md",
-      "tokens": 38,
-      "type": "context"
     }
   ],
-  "generated_at": "2026-05-31T00:14:44.925Z",
+  "generated_at": "2026-05-31T00:35:03.215Z",
   "lane_tokens": {
-    "contexts": 3908,
+    "contexts": 3981,
     "stubs": 0,
-    "summaries": 1974
+    "summaries": 1949
   },
-  "source_fingerprint": "ce816f317d7504634afe220f2f5e3571c8951f2fcac524dc8467e3a7d8c584fc",
-  "total_tokens": 5882,
+  "source_fingerprint": "d95ef04b1723f554c3dbead33c62ba384876bf1f447ebf95127f72817473d973",
+  "total_tokens": 5930,
   "version": 1
 }

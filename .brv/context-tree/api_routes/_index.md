@@ -1,19 +1,23 @@
 ---
-children_hash: 59bd9ffa4d1898e372cb2ee9ffeff0c77fdefa0058aa1455ef06caf56535bbfc
-compression_ratio: 0.4855595667870036
+children_hash: 314e7001931eb49b335d322b606083b8c05d1abfbe77a8863f8937ee5bb7d9f0
+compression_ratio: 0.44654088050314467
 condensation_order: 2
-covers: [token_prediction/_index.md, tutor_chat/_index.md]
-covers_token_total: 554
+covers: [proxy/_index.md, token_prediction/_index.md, tutor_chat/_index.md]
+covers_token_total: 795
 summary_level: d2
-token_count: 269
+token_count: 355
 type: summary
 ---
-## API Routes
+This domain covers the application's API endpoints, which are handled by both a Node.js/Express backend and a PHP proxy for routing flexibility.
 
-This domain documents the application's API endpoints, which are primarily responsible for interacting with the Gemini AI service.
+### Core API Endpoints
 
-### Token Prediction
--   **`token_prediction_endpoint.md`**: Details the token prediction endpoint implemented in `routes/predict.ts`. The `handlePredictTokens` function simulates an LLM's prediction head by sending a detailed meta-prompt to the Gemini API to generate token candidates with logits. A key architectural feature is the inclusion of hardcoded fallback candidates to ensure functionality even if the Gemini API call fails or the API key is not configured.
+The primary application logic is implemented in two main endpoints:
 
-### Tutor Chat
--   **`ai_tutor_chat_endpoint.md`**: Covers the core AI tutor chat functionality, controlled by the `handleTutorChat` function in `routes/tutor.ts`. The endpoint processes user chat history, formats it for the Gemini API, and uses a detailed system instruction in Spanish to define the tutor's persona. Similar to the prediction endpoint, it provides a pre-canned response if the `GEMINI_API_KEY` is missing, ensuring a graceful user experience.
+*   **Tutor Chat**: The core of the conversational AI, detailed in `ai_tutor_chat_endpoint.md`. The `handleTutorChat` controller in `routes/tutor.ts` formats chat history for the Gemini API. It uses a detailed system instruction in Spanish to define the AI's expert persona and includes a crucial check for the `GEMINI_API_KEY`, returning a pre-canned response if the key is missing to ensure functionality.
+
+*   **Token Prediction**: As documented in `token_prediction_endpoint.md`, the `handlePredictTokens` controller (`routes/predict.ts`) simulates an LLM's prediction head. It uses the Gemini API to generate 5 token candidates with logits and explanations, enforcing a specific JSON output schema. For didactic purposes, it provides hardcoded fallback candidates if the API key is not configured.
+
+### PHP Proxy
+
+A PHP proxy (`backend/api-proxy.php`), described in `php_proxy_endpoints.md`, offers a simplified routing layer. It uses a `?action=` query parameter to direct traffic to the `tutor-chat` and `predict-tokens` endpoints. This architecture simplifies routing and explicitly handles CORS `OPTIONS` requests and provides a `?action=debug=1` endpoint for diagnostics.
