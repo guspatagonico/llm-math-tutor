@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { MessageSquare, Send, Sparkles, RefreshCw } from "lucide-react";
-import { useTutorChat } from "../../hooks/useTutorChat";
+import { useTutorChatStore } from "../../stores/tutorChatStore";
 import ChatMessage from "../ui/ChatMessage";
 import LoadingDots from "../ui/LoadingDots";
 import WarningBanner from "../ui/WarningBanner";
@@ -8,16 +8,29 @@ import Spinner from "../ui/Spinner";
 import IconBox from "../ui/IconBox";
 
 export default function AITutorChat() {
-  const {
-    messages,
-    inputText,
-    setInputText,
-    isSending,
-    warningMsg,
-    messagesEndRef,
-    handleSendMessage,
-    clearChat,
-  } = useTutorChat();
+  const messages = useTutorChatStore((s) => s.messages);
+  const inputText = useTutorChatStore((s) => s.inputText);
+  const setInputText = useTutorChatStore((s) => s.setInputText);
+  const isSending = useTutorChatStore((s) => s.isSending);
+  const warningMsg = useTutorChatStore((s) => s.warningMsg);
+  const hasUserSentMessage = useTutorChatStore((s) => s.hasUserSentMessage);
+  const sendMessage = useTutorChatStore((s) => s.sendMessage);
+  const clearChat = useTutorChatStore((s) => s.clearChat);
+
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!hasUserSentMessage) {
+      return;
+    }
+
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, hasUserSentMessage]);
+
+  const handleSendMessage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await sendMessage(inputText);
+  };
 
   return (
     <div id="ai-tutor-chat" className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm rounded-2xl overflow-hidden flex flex-col h-[520px] transition-colors duration-300">

@@ -20,6 +20,11 @@ This project is indexed by GitNexus as **llm-math-tutor** (474 symbols, 665 rela
 - NEVER rename symbols with find-and-replace — use `gitnexus_rename` which understands the call graph.
 - NEVER commit changes without running `gitnexus_detect_changes()` to check affected scope.
 
+## Language and Writing Policy
+
+- For this project, all commit messages, release notes, changelogs, and project documentation MUST be written in Argentine Spanish (`es-AR`).
+- Use correct accents and tildes, include the letter `ñ` when appropriate, and preserve full punctuation marks (for example, opening and closing `¿?` and `¡!`).
+
 ## Resources
 
 | Resource | Use for |

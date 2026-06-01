@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useMemo } from "react";
 import { Network, RefreshCw, Info } from "lucide-react";
-import { useSoftmax } from "../../hooks/useSoftmax";
+import { softmax, softmaxJacobian } from "../../utils/math";
+import { useSoftmaxStore } from "../../stores/softmaxStore";
 import ModuleHeader from "../ui/ModuleHeader";
 import ModuleCard from "../ui/ModuleCard";
 import CalloutBox from "../ui/CalloutBox";
 import MathEquation from "../shared/MathEquation";
 
-const INITIAL_LOGITS = [3.0, 1.5, 0.5];
 const TOKEN_LABELS = ["Token 1 (gato)", "Token 2 (perro)", "Token 3 (tejado)"];
 
 const toSubscript = (num: number): string => {
@@ -18,8 +18,14 @@ const toSubscript = (num: number): string => {
 };
 
 export default function SoftmaxGradientModule() {
-  const { logits, probs, jacobian, handleLogitChange, resetLogits } = useSoftmax(INITIAL_LOGITS);
-  const [correctTokenIdx, setCorrectTokenIdx] = useState<number>(0);
+  const logits = useSoftmaxStore((s) => s.logits);
+  const setLogit = useSoftmaxStore((s) => s.setLogit);
+  const resetLogits = useSoftmaxStore((s) => s.resetLogits);
+  const correctTokenIdx = useSoftmaxStore((s) => s.correctTokenIdx);
+  const setCorrectTokenIdx = useSoftmaxStore((s) => s.setCorrectTokenIdx);
+
+  const probs = useMemo(() => softmax(logits), [logits]);
+  const jacobian = useMemo(() => softmaxJacobian(logits), [logits]);
 
   const softmaxOut = logits.map((z, idx) => ({
     logit: z,
@@ -140,7 +146,7 @@ export default function SoftmaxGradientModule() {
                     <span className="font-semibold text-slate-700 dark:text-slate-300 font-mono">{TOKEN_LABELS[idx]}</span>
                     <span className="font-mono font-bold text-purple-600 dark:text-purple-400 bg-purple-500/10 border border-purple-500/20 px-1.5 rounded">{item.logit.toFixed(1)}</span>
                   </div>
-                  <input type="range" min="-2" max="6" step="0.1" value={item.logit} onChange={(e) => handleLogitChange(idx, parseFloat(e.target.value))} aria-label={`Logit bruto del ${TOKEN_LABELS[idx]}`} className="w-full h-1 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-purple-500" />
+                  <input type="range" min="-2" max="6" step="0.1" value={item.logit} onChange={(e) => setLogit(idx, parseFloat(e.target.value))} aria-label={`Logit bruto del ${TOKEN_LABELS[idx]}`} className="w-full h-1 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-purple-500" />
                   <div className="flex justify-between text-xs text-slate-600 dark:text-slate-400 font-mono">
                     <span>Exp: {item.exp.toFixed(2)}</span>
                     <span className="font-bold text-purple-600 dark:text-purple-400">Prob: {(item.prob * 100).toFixed(1)}%</span>

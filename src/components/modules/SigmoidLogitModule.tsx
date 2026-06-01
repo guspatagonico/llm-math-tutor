@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import { Activity, HelpCircle, Award } from "lucide-react";
 import { sigmoid, logit } from "../../utils/math";
 import ModuleHeader from "../ui/ModuleHeader";
@@ -9,10 +9,13 @@ import AreaChartWidget from "../ui/AreaChartWidget";
 import CalloutBox from "../ui/CalloutBox";
 import MathEquation from "../shared/MathEquation";
 import MathMarkdownRenderer from "../shared/MathMarkdownRenderer";
+import { useSigmoidLogitStore } from "../../stores/sigmoidLogitStore";
 
 export default function SigmoidLogitModule() {
-  const [sigmoidInput, setSigmoidInput] = useState<number>(0);
-  const [logitInput, setLogitInput] = useState<number>(0.5);
+  const sigmoidInput = useSigmoidLogitStore((s) => s.sigmoidInput);
+  const setSigmoidInput = useSigmoidLogitStore((s) => s.setSigmoidInput);
+  const logitInput = useSigmoidLogitStore((s) => s.logitInput);
+  const setLogitInput = useSigmoidLogitStore((s) => s.setLogitInput);
 
   const sigmoidData = useMemo(() => {
     const data = [];

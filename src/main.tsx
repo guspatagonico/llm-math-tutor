@@ -17,6 +17,21 @@ import {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
+import { useTutorChatStore } from "./stores/tutorChatStore";
+import { useTemperatureStore } from "./stores/temperatureStore";
+import { useSoftmaxStore } from "./stores/softmaxStore";
+import { useSigmoidLogitStore } from "./stores/sigmoidLogitStore";
+
+declare global {
+  interface Window {
+    __stores?: {
+      tutorChat: typeof useTutorChatStore;
+      temperature: typeof useTemperatureStore;
+      softmax: typeof useSoftmaxStore;
+      sigmoidLogit: typeof useSigmoidLogitStore;
+    };
+  }
+}
 
 const analyticsMeasurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
 
@@ -34,6 +49,15 @@ if (analyticsMeasurementId) {
     gtag('config', '${analyticsMeasurementId}');
   `;
   document.head.appendChild(inlineScript);
+}
+
+if (import.meta.env.DEV) {
+  window.__stores = {
+    tutorChat: useTutorChatStore,
+    temperature: useTemperatureStore,
+    softmax: useSoftmaxStore,
+    sigmoidLogit: useSigmoidLogitStore,
+  };
 }
 
 createRoot(document.getElementById('root')!).render(

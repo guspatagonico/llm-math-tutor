@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Sparkles, Play, PlusCircle, Flame } from "lucide-react";
 import { Cell } from "recharts";
-import { useTemperature } from "../../hooks/useTemperature";
+import { normalizeSteps } from "../../utils/math";
+import { useTemperatureStore } from "../../stores/temperatureStore";
 import { EXAMPLE_PROMPTS, TEMPERATURE_INTERPRETATIONS } from "../../constants/temperature";
 import ModuleHeader from "../ui/ModuleHeader";
 import ModuleCard from "../ui/ModuleCard";
@@ -11,16 +12,26 @@ import WarningBanner from "../ui/WarningBanner";
 import CalloutBox from "../ui/CalloutBox";
 import Spinner from "../ui/Spinner";
 
-const DEFAULT_PROMPT = "Había una vez un";
-const DEFAULT_TEMP = 0.7;
-
 export default function TemperatureSimulator() {
-  const {
-    prompt, setPrompt,
-    temperature, setTemperature,
-    isPredicting, warningMsg,
-    steps, fetchCandidates,
-  } = useTemperature(DEFAULT_PROMPT, DEFAULT_TEMP);
+  const prompt = useTemperatureStore((s) => s.prompt);
+  const setPrompt = useTemperatureStore((s) => s.setPrompt);
+  const candidates = useTemperatureStore((s) => s.candidates);
+  const temperature = useTemperatureStore((s) => s.temperature);
+  const setTemperature = useTemperatureStore((s) => s.setTemperature);
+  const isPredicting = useTemperatureStore((s) => s.isPredicting);
+  const warningMsg = useTemperatureStore((s) => s.warningMsg);
+  const fetchCandidates = useTemperatureStore((s) => s.fetchCandidates);
+
+  useEffect(() => {
+    if (candidates.length === 0) {
+      void fetchCandidates(prompt);
+    }
+  }, []);
+
+  const steps = useMemo(
+    () => normalizeSteps(candidates, Math.max(0.01, temperature)),
+    [candidates, temperature]
+  );
 
   const [isSampling, setIsSampling] = useState(false);
   const [sampledToken, setSampledToken] = useState<string | null>(null);
